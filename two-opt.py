@@ -10,13 +10,13 @@ def cost(pair):
 	student, offering = pair
 
 	if offering.id not in student.rank:
-		rankPriority = rankSize + 1
+		rankPriority = rankSize + 1		# if offering not on rank, default to 1 more than size of rank
 	else:
-		rankPriority = student.rank.index(offering.id) + 1
+		rankPriority = student.rank.index(offering.id) + 1	# use position of offering on student's rank
 
 	return rankPriority + student.gradePriority
 
 # determine if a pairing is legal based on grade / age restrictions
 def isLegal(pair):
 	student, offering = pair
-	return student.grade < offering.minGrade or student.age < offering.minAge:
+	return student.grade >= offering.minGrade and student.age >= offering.minAge:
