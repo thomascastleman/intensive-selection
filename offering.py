@@ -1,0 +1,4 @@
+
+
+class Offering:
+	pass
