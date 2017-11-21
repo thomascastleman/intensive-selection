@@ -2,11 +2,12 @@
 
 class Student:
 
-	def __init__(self, _rank, _age, _grade, _isGhost=False):
+	def __init__(self, _id, _rank, _age, _grade, _isGhost=False):
 
 		self.isGhost = _isGhost
 
 		if not self.isGhost:
+			self.id = _id												# ID
 			self.rank = _rank											# list of top offerings in prioritized order
 			self.age = _age												# age of student
 			self.grade = _grade											# grade of student (9-12)
