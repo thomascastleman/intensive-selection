@@ -1,6 +1,10 @@
 
 rankSize = 5		# number of offerings each student ranks
 
+# hashmaps of IDs to objects:
+idToOfferings = {}
+idToStudents = {}
+
 # calculate the cost of a single pair, of the form (student, offering)
 def cost(pair):
 	student, offering = pair

@@ -10,3 +10,6 @@ Give stats like:
 	- percentage full for each intensive (num students assigned / max capacity)
 
 """
+
+def evaluate(matching):
+	pass

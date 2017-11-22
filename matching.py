@@ -1,5 +1,5 @@
 
-from main import *
+from main import cost
 
 # class to handle a given matching of students to offerings; a given solution
 class Matching:
@@ -13,3 +13,4 @@ class Matching:
 		self.cost = 0
 		for pair in self.pairs:
 			self.cost += cost(pair)
+		return self.cost
