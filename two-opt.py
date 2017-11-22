@@ -34,19 +34,14 @@ def two_opt(studentList, offeringList):
 
 			# if swap beneficial OR probabilistic
 			if tentativeCost < currentCost or random.randrange(0, 100) < temp:
-
-				
-
-
-
-
-
-
-
-
-
-
-		temp *= rate
+				# remove both previous pairs
+				del matching.pairs[indA]
+				del matching.pairs[indB]
+				# add swapped pairs
+				matching.pairs.append(swap1)
+				matching.pairs.append(swap2)
+			
+			temp *= rate
 
 # get two random indices in a matching
 def getRandomIndices(lenOfMatching):
