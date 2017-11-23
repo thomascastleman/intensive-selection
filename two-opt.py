@@ -1,15 +1,12 @@
 
 import random
 from main import *
-
-# construct an initial randomized but legal matching
-def buildInitialMatching(studentList, offeringList):
-	pass
+from acceptable_solution import buildAcceptableSolution
 
 # returns Matching object
 def two_opt(studentList, offeringList):
 	
-	matching = buildInitialMatching(studentList, offeringList)	# construct initial matching
+	matching = buildAcceptableSolution(studentList, offeringList)	# construct initial matching
 	currentCost = matching.calcMatchingCost()	# calculate cost of that matching
 
 	temp = 100.0	# temperature for simulated annealing
