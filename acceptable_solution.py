@@ -4,6 +4,6 @@
 # using minimum conflicts alg with simulated annealing
 # 
 # receives lists of Student and Offering objects
-# returns Matching object
+# modifies student and offering properties, and returns Matching object with necessary ghost students added
 def buildAcceptableSolution(studentList, offeringList):
 	pass
