@@ -1,6 +1,7 @@
 
-import random
-from main import *
+from random import randrange
+from main import *	# access to ID hashmaps
+from util import *	# access to cost functions / legality checking
 from acceptable_solution import buildAcceptableSolution
 
 # void, updates properties of Student obj 
@@ -45,10 +46,10 @@ def two_opt(studentList, offeringList):
 def getRandomIndices(lenOfMatching):
 	possibleIndices = [i for i in range(lenOfMatching)]
 
-	rand1 = possibleIndices[random.randrange(0, len(possibleIndices))]
+	rand1 = possibleIndices[randrange(0, len(possibleIndices))]
 	possibleIndices.remove(rand1)
 
-	rand2 = possibleIndices[random.randrange(0, len(possibleIndices))]
+	rand2 = possibleIndices[randrange(0, len(possibleIndices))]
 
 	return (rand1, rand2)
 
