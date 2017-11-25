@@ -5,7 +5,7 @@ without taking any priority into account,
 using minimum conflicts alg with simulated annealing
 
 Receives lists of Student and Offering objects
-Modifies student and offering properties, and adds necessary ghost students
+Modifies student and offering properties
 
 """
 def buildAcceptableSolution(studentList, offeringList):

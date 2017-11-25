@@ -8,7 +8,8 @@ from acceptable_solution import buildAcceptableSolution
 def two_opt(studentList, offeringList):
 	
 	buildAcceptableSolution(studentList, offeringList)	# construct initial matching
-	currentCost = getSoftCostOfAllPairs(studentList)
+	currentCost = getSoftCostOfAllPairs(studentList)	# calculate soft cost of all pairs
+	addAllGhostStudents(studentList, offeringList)	# now add ghosts (since they have no cost)
 
 	temp = 100.0	# temperature for simulated annealing
 	rate = 0.97		# rate of temperature decrease
@@ -53,6 +54,7 @@ def getRandomIndices(lenOfMatching):
 
 	return (rand1, rand2)
 
+# sum soft cost across all pairings
 def getSoftCostOfAllPairs(students):
 	cost = 0
 	for student in students:
@@ -60,3 +62,16 @@ def getSoftCostOfAllPairs(students):
 			offering = idToOffering[student.curOfferingID]	# get paired offering
 			cost += softCost((student, offering))			# add soft cost to total
 	return cost
+
+# add necessary ghost students to fill out all empty spots
+def addAllGhostStudents(students, offerings):
+	from classes.Student import Student
+	for offering in offerings:
+		while offering.curSubscribed < offering.maxCapacity:
+			# create new ghost under this offering
+			ghost = Student(None, None, None, None, True)
+			ghost.curOfferingID = offering.id
+			# add to student list
+			students.append(ghost)
+			# increase subscription count
+			offering.curSubscribed += 1

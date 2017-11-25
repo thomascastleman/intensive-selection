@@ -1,9 +1,16 @@
 
-rankSize = 5		# number of offerings each student ranks
+""" GLOBAL VARS: -------------------------------------- """
+
+# number of offerings each student ranks
+rankSize = 5
 
 # hashmaps of IDs to objects:
 idToOfferings = {}
 idToStudents = {}
+
+""" --------------------------------------------------- """
+
+
 
 def main():
 	from classes.Student import Student
@@ -15,6 +22,5 @@ def main():
 	test.log()
 
 	print "success"
-
 
 main()
