@@ -7,7 +7,7 @@ from acceptable_solution import buildAcceptableSolution
 def two_opt(studentList, offeringList):
 	
 	matching = buildAcceptableSolution(studentList, offeringList)	# construct initial matching
-	currentCost = matching.calcMatchingCost()	# calculate cost of that matching
+	currentCost = matching.calcMatchingCost(softCost)				# calculate cost of that matching
 
 	temp = 100.0	# temperature for simulated annealing
 	rate = 0.97		# rate of temperature decrease
@@ -26,8 +26,8 @@ def two_opt(studentList, offeringList):
 		if isLegal(swap1) and isLegal(swap2):
 			# calculate tentative cost as updated by swap
 			tentativeCost = currentCost
-			tentativeCost -= (cost((studentA, offeringA)) + cost(studentB, offeringB))
-			tentativeCost += (cost(swap1) + cost(swap2))
+			tentativeCost -= (softCost((studentA, offeringA)) + softCost(studentB, offeringB))
+			tentativeCost += (softCost(swap1) + softCost(swap2))
 
 			# if swap beneficial OR probabilistic
 			if tentativeCost < currentCost or random.randrange(0, 100) < temp:

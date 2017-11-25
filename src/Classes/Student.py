@@ -5,6 +5,7 @@ class Student:
 	def __init__(self, _id, _age, _grade, _rank, _isGhost=False):
 
 		self.isGhost = _isGhost
+		self.curOfferingID = None
 
 		if not self.isGhost:
 			self.id = _id			# ID

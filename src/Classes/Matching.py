@@ -1,6 +1,4 @@
 
-from main import cost
-
 # class to handle a given matching of students to offerings; a given solution
 class Matching:
 
@@ -9,8 +7,8 @@ class Matching:
 		self.cost = None
 
 	# calculate the cost of an entire matching (sum of the cost of each pair)
-	def calcMatchingCost(self):
+	def calcMatchingCost(self, costFn):
 		self.cost = 0
 		for pair in self.pairs:
-			self.cost += cost(pair)
+			self.cost += costFn(pair)
 		return self.cost
