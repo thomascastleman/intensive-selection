@@ -24,7 +24,6 @@ def staticCost(pair):
 	student, offering = pair
 	return (1 if student.age < offering.minAge else 0) + (1 if student.grade < offering.minGrade else 0)
 
-
 # determine if a pair is legal based on grade / age restrictions
 def isLegal(pair):
 	student, offering = pair

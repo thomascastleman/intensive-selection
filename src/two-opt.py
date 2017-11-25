@@ -3,20 +3,24 @@ import random
 from main import *
 from acceptable_solution import buildAcceptableSolution
 
-# returns Matching object
+# void, updates properties of Student obj 
 def two_opt(studentList, offeringList):
 	
-	matching = buildAcceptableSolution(studentList, offeringList)	# construct initial matching
-	currentCost = matching.calcMatchingCost(softCost)				# calculate cost of that matching
+	buildAcceptableSolution(studentList, offeringList)	# construct initial matching
+	currentCost = getSoftCostOfAllPairs(studentList)
 
 	temp = 100.0	# temperature for simulated annealing
 	rate = 0.97		# rate of temperature decrease
 
 	while temp > 0.0001:
-		# get random pairs from matching
-		indA, indB = getRandomIndices(len(matching.pairs))
-		studentA, offeringA = matching.pairs[indA]
-		studentB, offeringB = matching.pairs[indB]
+		# get random pairs
+		indA, indB = getRandomIndices(len(studentList))
+
+		studentA = studentList[indA]
+		offeringA = idToOffering[studentA.curOfferingID]
+
+		studentB = studentList[indB]
+		offeringB = idToOffering[studentB.curOfferingID]
 
 		# make swap pairs
 		swap1 = (studentA, offeringB)
@@ -31,16 +35,11 @@ def two_opt(studentList, offeringList):
 
 			# if swap beneficial OR probabilistic
 			if tentativeCost < currentCost or random.randrange(0, 100) < temp:
-				# remove both previous pairs
-				del matching.pairs[indA]
-				del matching.pairs[indB]
-				# add swapped pairs
-				matching.pairs.append(swap1)
-				matching.pairs.append(swap2)
+				# make swap
+				studentA.curOfferingID = offeringB.id
+				studentB.curOfferingID = offeringA.id
 			
 			temp *= rate
-
-	return matching
 
 # get two random indices in a matching
 def getRandomIndices(lenOfMatching):
@@ -52,3 +51,11 @@ def getRandomIndices(lenOfMatching):
 	rand2 = possibleIndices[random.randrange(0, len(possibleIndices))]
 
 	return (rand1, rand2)
+
+def getSoftCostOfAllPairs(students):
+	cost = 0
+	for student in students:
+		if not student.isGhost:
+			offering = idToOffering[student.curOfferingID]	# get paired offering
+			cost += softCost((student, offering))			# add soft cost to total
+	return cost
