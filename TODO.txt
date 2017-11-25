@@ -1,0 +1,8 @@
+
+Tasks to do:
+
+- Add matching evaluation and stats
+- functionality for generating realistic test data
+- implement acceptable solution of CSP
+- implement Hosp / Res solution from Glasgow paper
+- is a GA still on the table?

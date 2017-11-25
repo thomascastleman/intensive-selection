@@ -40,6 +40,8 @@ def two_opt(studentList, offeringList):
 			
 			temp *= rate
 
+	return matching
+
 # get two random indices in a matching
 def getRandomIndices(lenOfMatching):
 	possibleIndices = [i for i in range(lenOfMatching)]
