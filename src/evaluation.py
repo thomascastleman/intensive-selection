@@ -11,5 +11,21 @@ Give stats like:
 
 """
 
+from main import rankSize, idToOfferings, idToStudents
+
 def evaluate(studentList, offeringList):
-	pass
+	
+	choices = [0 for i in range(rankSize + 1)]
+
+	for student in studentList:
+
+		offering = idToOfferings[student.curOfferingID]
+
+		if offering.id not in student.rank:
+			index = rankSize
+		else:
+			index = student.rank.index(offering.id)
+
+		choices[index] += 1
+
+	# percentage for each choice: choices[index] / number of students
