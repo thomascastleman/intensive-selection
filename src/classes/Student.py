@@ -1,4 +1,4 @@
-
+# CLASS TO HANDLE ALL DATA FOR EACH STUDENT
 
 class Student:
 
