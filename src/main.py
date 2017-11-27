@@ -12,7 +12,7 @@ idToStudents = {}
 
 """ --------------------------------------------------- """
 
-
+from evaluation import *
 
 def main():
 	# from classes.Student import Student
@@ -25,6 +25,32 @@ def main():
 
 	# print "success"
 
-	
+	from random import randint
+	from classes.Offering import Offering
+	from classes.Student import Student
 
-main()
+	students = []
+	offerings = []
+
+	for i in range(20):
+		o = Offering(i, randint(20, 30), randint(9, 12), randint(13, 18))
+		offerings.append(o)
+		idToOfferings[i] = o
+
+	for i in range(400):
+		s = Student(i, randint(13, 18), randint(9, 12), [])
+
+		s.curOfferingID = offerings[randint(0, len(offerings) - 1)].id
+		for j in range(0, rankSize):
+			s.rank.append(offerings[randint(0, len(offerings) - 1)].id)
+
+		students.append(s)
+
+		idToStudents[i] = s
+
+	evaluate(students, offerings)
+
+
+	
+if __name__ == "__main__":
+	main()

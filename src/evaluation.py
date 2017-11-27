@@ -14,18 +14,27 @@ Give stats like:
 from main import rankSize, idToOfferings, idToStudents
 
 def evaluate(studentList, offeringList):
-	
+
+
+	# number of students receiving each choice
 	choices = [0 for i in range(rankSize + 1)]
 
 	for student in studentList:
 
+		# get offering object
 		offering = idToOfferings[student.curOfferingID]
 
+		# get position on student's rank
 		if offering.id not in student.rank:
 			index = rankSize
 		else:
 			index = student.rank.index(offering.id)
-
+		# increment number of students with this choice
 		choices[index] += 1
 
-	# percentage for each choice: choices[index] / number of students
+	# log findings
+	for i in range(len(choices)):
+		if i == len(choices) - 1:
+			print "Arbitrary Choice: " + str(float(choices[i]) / len(studentList) * 100.0) + "%"
+		else:
+			print "Choice " + str(i + 1) + ": " + str(float(choices[i]) / len(studentList) * 100.0) + "%"
