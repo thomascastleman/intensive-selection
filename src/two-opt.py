@@ -37,7 +37,7 @@ def two_opt(studentList, offeringList):
 			tentativeCost += (softCost(swap1) + softCost(swap2))
 
 			# if swap beneficial OR probabilistic
-			if tentativeCost < currentCost or random.randrange(0, 100) < temp:
+			if tentativeCost < currentCost or randrange(0, 100) < temp:
 				# make swap
 				studentA.curOfferingID = offeringB.id
 				studentB.curOfferingID = offeringA.id
