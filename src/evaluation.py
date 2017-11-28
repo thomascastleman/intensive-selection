@@ -15,26 +15,64 @@ from main import rankSize, idToOfferings, idToStudents
 
 def evaluate(studentList, offeringList):
 
-
-	# number of students receiving each choice
-	choices = [0 for i in range(rankSize + 1)]
+	choices = [0 for i in range(rankSize + 1)]	# number of students receiving each choice
+	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades
+	gradeCounts = [0 for i in range(4)]	# total number of people in each grade
 
 	for student in studentList:
-
-		# get offering object
-		offering = idToOfferings[student.curOfferingID]
+		
+		offering = idToOfferings[student.curOfferingID]	# get offering object
 
 		# get position on student's rank
 		if offering.id not in student.rank:
 			index = rankSize
 		else:
 			index = student.rank.index(offering.id)
-		# increment number of students with this choice
-		choices[index] += 1
 
-	# log findings
+		choices[index] += 1	# increment number of students with this choice
+		gradeCounts[[9, 10, 11, 12].index(student.grade)] += 1	# increment num students in this grade
+
+		# if first choice, increment record of first choice students in this grade
+		if index == 0:
+			grades[[9, 10, 11, 12].index(student.grade)] += 1
+
+	# Format results and print to console:
+	print "\n-------------------------------------------------------------------"
+	print "\nEVALUATION OF MATCHING BETWEEN " + str(len(studentList)) + " STUDENTS AND " + str(len(offeringList)) + " OFFERINGS:\n"
+
+
+	print "Percentage of each choice out of all students"
 	for i in range(len(choices)):
 		if i == len(choices) - 1:
-			print "Arbitrary Choice: " + str(float(choices[i]) / len(studentList) * 100.0) + "%"
+			percentage = float(choices[i]) / len(studentList) * 100.0
+			print "Arbitrary:\t{:.3f}%".format(percentage)
 		else:
-			print "Choice " + str(i + 1) + ": " + str(float(choices[i]) / len(studentList) * 100.0) + "%"
+			percentage = float(choices[i]) / len(studentList) * 100.0
+			print "Choice " + str(i + 1) + ":\t{:.3f}%".format(percentage)
+
+	print "\nPercentage first choice per grade"
+	for i in range(len(grades)):
+		percentage = float(grades[i]) / gradeCounts[i] * 100.0
+		print "Grade " + str(i + 9) + ":\t{:.3f}%".format(percentage)
+
+	print "\nPercentage full for each offering:\n"
+	total = 0 # sum of all capacity percentages
+	minPercent = None
+	maxPercent = None
+
+	print "ID\tPercent of capacity filled"
+	for offering in offeringList:
+		percentage = float(offering.curSubscribed) / offering.maxCapacity * 100.0
+		print str(offering.id) + ": \t{:.3f}%".format(percentage)
+
+		total += percentage
+		if minPercent == None or percentage < minPercent:
+			minPercent = percentage
+		if maxPercent == None or percentage > maxPercent:
+			maxPercent = percentage
+
+	print "\nAverage Percent Full: {:.3f}%".format(total / len(offeringList))
+	print "Min Percent Full: {:.3f}%".format(minPercent)
+	print "Max Percent Full: {:.3f}%".format(maxPercent)
+
+	print "\n-------------------------------------------------------------------"
