@@ -16,9 +16,10 @@ from util import *
 def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferings):
 	
 	netConflict = 0
+	alreadyCalculated = [False for i in range(len(studentList))]
 
 	# students cross offerings: holds all static costs calculated for pairs
-	stuXoff = [[None for i in range(len(offeringList))] for j in range(len(studentList))]
+	stuXoff = [[0 for i in range(len(offeringList))] for j in range(len(studentList))]
 
 
 	for student in studentList:
@@ -35,7 +36,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 		cost = staticCost((student, offering))	# calculate static cost
 		stuXoff[student.id][offID] = cost		# store cost value in stuXoff
-		offering.pq.put((cost, student.id))		# add student ID to offering's PQ
+		offering.pq.put((-cost, student.id))		# add student ID to offering's PQ (negate cost to reverse pq)
 
 		netConflict += cost		# sum all static costs
 
@@ -49,3 +50,13 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 	print "STUXOFF: "
 	for row in stuXoff:
 		print row
+
+	# while netConflict > 0:
+	for i in range(1): # DEBUG
+		
+		for offering in offeringList:
+			# get first student on offering's PQ
+			student = idToStudents[offering.pq.queue[0][1]]
+			
+
+			

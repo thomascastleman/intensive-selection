@@ -28,7 +28,7 @@ def main():
 	# 	off.log()
 
 	csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
-	
+
 
 
 
