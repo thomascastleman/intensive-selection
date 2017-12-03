@@ -9,5 +9,5 @@ Modifies student and offering properties to create pairs
 DOES NOT add ghost students
 
 """
-def buildAcceptableSolution(studentList, offeringList):
+def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferings):
 	pass

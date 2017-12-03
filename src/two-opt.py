@@ -8,11 +8,12 @@ from acceptable_solution import buildAcceptableSolution
 def two_opt(studentList, offeringList, idToOfferings):
 	
 	buildAcceptableSolution(studentList, offeringList)	# construct initial matching
+	initAllAgeP(studentList)	# initialize age priorities
 	currentCost = getSoftCostOfAllPairs(studentList, idToOfferings)	# calculate soft cost of all pairs
 	addAllGhostStudents(studentList, offeringList)	# now add ghosts (since they have no cost)
 
 	temp = 100.0	# temperature for simulated annealing
-	rate = 0.97		# rate of temperature decrease
+	rate = 0.99		# rate of temperature decrease
 
 	while temp > 0.0001:
 		# get random pairs

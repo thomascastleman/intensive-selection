@@ -33,6 +33,8 @@ def generateTestData(numStudents, numOfferings):
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
 	students, offerings = [], []	# arrays to hold objects
 	idToStudents, idToOfferings = {}, {}	# local hashmaps
+
+	totalCapacity = 0
 	
 	# the way I'm doing it these are probably too uniform
 	popularities = getPopularities(numOfferings)	# 0-1 that sum to 1
@@ -59,7 +61,8 @@ def generateTestData(numStudents, numOfferings):
 
 	# create as many offerings as requested
 	for offID in range(numOfferings):
-		maxCap = abs(int(numStudents / numOfferings) + randint(-5, 5))	# this is up for debate
+		maxCap = abs(int(numStudents / numOfferings) + randint(-2, 2))	# this is up for debate
+		totalCapacity += maxCap
 		minGrade, minAge = 9, 0		# init at defaults
 		if uniform(0, 1) < 0.2:
 			# apply grade restriction
@@ -86,6 +89,11 @@ def generateTestData(numStudents, numOfferings):
 	# plt.title('Choice Frequency')
 	 
 	# plt.show()
+
+	if totalCapacity < len(students):
+		offerings[0].maxCapacity += len(students) - totalCapacity
+		
+
 
 	return students, offerings, idToStudents, idToOfferings
 

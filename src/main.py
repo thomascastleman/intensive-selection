@@ -17,7 +17,7 @@ import NonUniformTestData as td
 def main():
 
 	# construct all objects, and hashmaps
-	students, offerings, idToStudents, idToOfferings = td.generateTestData(50, 5)
+	students, offerings, idToStudents, idToOfferings = td.generateTestData(50, 10)
 
 	# print "\n\nSTUDENTS: "
 	# for stu in students:
@@ -26,7 +26,12 @@ def main():
 	# for off in offerings:
 	# 	off.log()
 
+
+
+
 	
+
+
 
 
 
