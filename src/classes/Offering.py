@@ -1,5 +1,7 @@
 # CLASS TO HANDLE ALL DATA FOR EACH OFFERING
 
+import Queue as q
+
 class Offering:
 
 	def __init__(self, _id, _maxCapacity, _minGrade=9, _minAge=0):
@@ -12,6 +14,7 @@ class Offering:
 		# properties for acceptable matching CSP:
 		self.curSubscribed = 0	# number of students currently subscribed to this offering
 		self.capacityCost = 0	# hard cost when oversubscribed (# of students over capacity)
+		self.pq = q.PriorityQueue()	# ID's of currently subscribed students, ordered by static cost
 
 	# FOR DEBUG
 	def log(self):

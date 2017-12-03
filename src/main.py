@@ -13,11 +13,12 @@ apCoeff = 1.0	# age priority
 """ --------------------------------------------------- """
 
 import NonUniformTestData as td
+import acceptable_solution as csp
 
 def main():
 
 	# construct all objects, and hashmaps
-	students, offerings, idToStudents, idToOfferings = td.generateTestData(50, 10)
+	students, offerings, idToStudents, idToOfferings = td.generateTestData(100, 5)
 
 	# print "\n\nSTUDENTS: "
 	# for stu in students:
@@ -26,14 +27,8 @@ def main():
 	# for off in offerings:
 	# 	off.log()
 
-
-
-
+	csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
 	
-
-
-
-
 
 
 
