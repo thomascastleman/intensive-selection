@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.cm as cm
 import numpy as np
 studentData = []
-populatity = [0.21, 0.2, 0.11, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.04, 0.02,]
+popularity = [0.21, 0.2, 0.11, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.04, 0.02,]
 for student in range(308):
- studentData.append(np.random.choice(12, 5, replace=False, p=populatity))
+ studentData.append(np.random.choice(12, 5, replace=False, p=popularity))
 
 
 totals = [0 for i in range(12)]
