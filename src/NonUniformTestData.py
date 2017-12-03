@@ -16,7 +16,7 @@ from classes.Student import Student
 from classes.Offering import Offering
 from main import rankSize, 
 
-from random import randint
+from random import randint, uniform
 
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.cm as cm
@@ -44,6 +44,25 @@ def generateTestData(numStudents, numOfferings):
 		s = Student(stuID, age, grade, rank)	# construct student
 		idToStudents[stuID] = s					# add to global ID hashmap
 		students.append(s)						# add to students array
+
+	# create as many offerings as requested
+	for offID in range(numOfferings):
+		maxCap = int(numStudents / numOfferings) + randint(-5, 5)	# this is up for debate
+		minGrade, minAge = 9, 0		# init at defaults
+		if uniform(0, 1) < 0.2:
+			# apply grade restriction
+			if uniform(0, 1) < 0.5:
+
+			# apply age restriction
+			else:
+
+
+		off = Offering(offID, maxCap, minGrade, minAge)		# construct offering
+		idToOfferings[offID] = off							# add to global ID hashmap
+		offerings.append(off)								# add to offerings array
+
+
+	return students, offerings
 
 
 	# ------------------------------------------------------
