@@ -35,8 +35,11 @@ def generateTestData(numStudents, numOfferings):
 
 	# create as many students as requested
 	for stuID in range(numStudents):
-		grade = allGrades[randint(0, len(allGrades) - 1)]	# choose random grade
-		age = normalAges[allGrades.index(grade)] + randint(-1, 1)	# age correlates, plus or minus 1
+		# choose random grade
+		grade = allGrades[randint(0, len(allGrades) - 1)]
+
+		# age correlates, plus or minus 1
+		age = normalAges[allGrades.index(grade)] + np.random.choice([-1, 0, 1], 1, p=[0.25, 0.5, 0.25])[0]
 
 		# generate non-uniformly distributed rank
 		rank = np.random.choice(numOfferings, rankSize, replace=False, p=popularities)

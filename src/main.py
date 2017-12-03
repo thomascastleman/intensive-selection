@@ -49,7 +49,7 @@ def main():
 
 	# evaluate(students, offerings)
 
-	students, offerings = generateTestData(20, 5)
+	students, offerings = generateTestData(400, 20)
 
 	print "\n\nSTUDENTS: "
 	for stu in students:
