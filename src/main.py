@@ -18,7 +18,10 @@ import acceptable_solution as csp
 def main():
 
 	# construct all objects, and hashmaps
-	students, offerings, idToStudents, idToOfferings = td.generateTestData(100, 5)
+	students, offerings, idToStudents, idToOfferings = td.generateTestData(400, 20)
+
+	# build solution
+	csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
 
 	# print "\n\nSTUDENTS: "
 	# for stu in students:
@@ -26,8 +29,6 @@ def main():
 	# print "\n\nOFFERINGS: "
 	# for off in offerings:
 	# 	off.log()
-
-	csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
 
 
 

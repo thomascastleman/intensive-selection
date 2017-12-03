@@ -23,8 +23,14 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 
 	for student in studentList:
-		# randomize offering
-		offID = randint(0, len(offeringList) - 1)
+
+		possible = []
+		for off in offeringList:
+			if isLegal((student, off)):
+				possible.append(off)
+
+		offering = possible[randint(0, len(possible) - 1)]
+		offID = offering.id
 		student.curOfferingID = offID
 
 		# update offering's currently subscribed, look for oversubscription
@@ -48,18 +54,17 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 	# DEBUG
 	print "INITIAL NET CONFLICT:", netConflict
 
-	# print "STUXOFF: "
-	# for row in stuXoff:
-	# 	print row
-
+	restartTemp = 100.0
+	restartRate = 0.999
 	temperature = 100.0
-	rate = 0.99
+	rate = 0.8
+
 	iterations = 0
 
 
 	while netConflict > 0:
 
-		print "\nIteration ", iterations, " Temp at ", temperature
+		# print "Iteration ", iterations, " Temp at ", temperature, " Net conflict == ", netConflict
 		
 		if uniform(0, 1) > temperature:
 
@@ -105,7 +110,6 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 			newOff = offWithMinCost
 
 		else:
-			print "RANDOMIZING"
 
 			# randomize student
 			stu = studentList[randint(0, len(studentList) - 1)]
@@ -126,13 +130,10 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 				stuXoff[stu.id][previousOff.id] = staticCost((stu, previousOff))
 				stuXoff[stu.id][newOff.id] = staticCost((stu, newOff))
 
-		print "Previous true cost: ", stuXoff[stu.id][previousOff.id], " + ", previousOff.capacityCost
-
 		# update attributes of new offering to reflect change
 		stu.curOfferingID = newOff.id
 		newOff.curSubscribed += 1
 		if newOff.curSubscribed > newOff.maxCapacity:
-			print "new offering is now oversubscribed"
 			newOff.capacityCost += 1
 			netConflict += 1
 		newOff.pq.put((-stuXoff[stu.id][newOff.id], stu.id))
@@ -140,7 +141,6 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 		# update attributes of previous offering to reflect change
 		previousOff.curSubscribed -= 1
 		if previousOff.capacityCost > 0:
-			print "decrementing previous capacity cost"
 			previousOff.capacityCost -= 1
 			netConflict -= 1
 
@@ -150,27 +150,24 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 		temperature *= rate
 
-		if temperature < 0.01:
-			temperature = 100.0
-			print "TEMP RESET"
+		if temperature < restartTemp / 4.0:
+			temperature = restartTemp
+			restartTemp *= restartRate
+
+			if restartTemp < 0.0005:
+				restartTemp = 100.0
+			print "TEMP RESET @ iter=", iterations, " conflict=", netConflict, ", restart=", restartTemp
 
 		iterations += 1
-
-		print "New true cost: ", stuXoff[stu.id][newOff.id], " + ", newOff.capacityCost
-
-
-		# DEBUG: 
-
-		print "NET CONFLICT NOW ==\t\t\t\t", netConflict
 
 
 	print "\n\nPROCESS FINISHED WITH NET CONFLICT: ", netConflict
 
 	valid = testValidity(studentList, offeringList, idToOfferings)
-	print "OVERALL VALID? ", valid
+	print "\nOVERALL VALID? ", valid
 
 
-
+# test legality of a matching (good for debugeing)
 def testValidity(studentList, offeringList, idToOfferings):
 	
 	ageGradeViolations = 0
