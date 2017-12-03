@@ -12,7 +12,9 @@ class Student:
 			self.age = _age			# age of student
 			self.grade = _grade		# grade of student (9-12)
 			self.rank = _rank		# list of top offerings in prioritized order
-			self.gradePriority = [12, 11, 10, 9].index(self.grade) + 1	# 1-4 based on Senior - Freshman
+
+			# grade priority: in range (0, 1), equal to student's inverse grade value (1-4 for 12-9) over num possible grades (4)
+			self.gradeP = ([12, 11, 10, 9].index(self.grade) + 1) / 4
 
 	# for DEBUG
 	def log(self):
@@ -20,6 +22,6 @@ class Student:
 		print "Age: ", self.age
 		print "Grade: ", self.grade
 		print "Rank: ", self.rank
-		print "Priority: ", self.gradePriority
+		print "Priority: ", self.gradeP
 		print "Ghost? ", self.isGhost
 		print "Current Offering ID: ", self.curOfferingID

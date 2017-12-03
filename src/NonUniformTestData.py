@@ -30,7 +30,7 @@ def generateTestData(numStudents, numOfferings):
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
 	students, offerings = [], []	# arrays to hold objects
 	
-	# NEED TO GENERATE THESE POPULARITIES (SUM TO 1, length: numOfferings) ??? 
+	# the way I'm doing it these are probably too uniform
 	popularities = getPopularities(numOfferings)	# 0-1 that sum to 1
 
 	# create as many students as requested
