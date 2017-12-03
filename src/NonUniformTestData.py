@@ -92,8 +92,6 @@ def generateTestData(numStudents, numOfferings):
 
 	if totalCapacity < len(students):
 		offerings[0].maxCapacity += len(students) - totalCapacity
-		
-
 
 	return students, offerings, idToStudents, idToOfferings
 
