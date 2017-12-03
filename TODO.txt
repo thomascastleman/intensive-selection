@@ -1,12 +1,8 @@
 
 Tasks to do:
 
-- functionality for generating realistic test data (Accomplished? -- look into the way we generate popularities)
-
 - implement acceptable solution of CSP
 
 - implement Hosp / Res solution from Glasgow paper
 
 - is a GA still on the table?
-
-- talk about cost fn and weighting each aspect

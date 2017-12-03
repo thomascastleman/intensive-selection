@@ -26,8 +26,8 @@ import numpy as np
 # returns tuple of ([student objects], [offering objects])
 def generateTestData(numStudents, numOfferings):
 
-	# for graph:
-	totals = [0 for i in range(numOfferings)]
+	# # for visualization:
+	# totals = [0 for i in range(numOfferings)]
 
 	allGrades = [9, 10, 11, 12]		# grade levels
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
@@ -48,9 +48,9 @@ def generateTestData(numStudents, numOfferings):
 		rank = np.random.choice(numOfferings, rankSize, replace=False, p=popularities)
 
 
-		# visualization:
-		for r in rank:
-			totals[r] += 1
+		# # visualization:
+		# for r in rank:
+		# 	totals[r] += 1
 
 		s = Student(stuID, age, grade, rank)	# construct student
 		idToStudents[stuID] = s					# add to global ID hashmap
@@ -75,40 +75,7 @@ def generateTestData(numStudents, numOfferings):
 		offerings.append(off)								# add to offerings array
 
 
-	y_pos = np.arange(numOfferings)
-	 
-	plt.bar(y_pos, totals, align='center', alpha=0.5)
-	plt.xticks(y_pos, y_pos)
-	plt.ylabel('Frequency')
-	plt.xlabel('Intensive Choice')
-
-	plt.title('Choice Frequency')
-	 
-	plt.show()
-
-
-	return students, offerings
-
-
-	# ------------------------------------------------------
-
-	# studentData = []
-	# popularity = [0.21, 0.2, 0.11, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.04, 0.02,]
-
-	# for student in range(308):
-	#  studentData.append(np.random.choice(12, 5, replace=False, p=popularity))
-
-
-	# totals = [0 for i in range(12)]
-	# for student in range(308):
-	# 	for rank in studentData[student]:
-	# 		totals[rank]+=1
-	# 	print studentData[student]
-	# print "totals: ", totals 
-
-
-	# y_pos = np.arange(12)
-
+	# y_pos = np.arange(numOfferings)
 	 
 	# plt.bar(y_pos, totals, align='center', alpha=0.5)
 	# plt.xticks(y_pos, y_pos)
@@ -120,6 +87,9 @@ def generateTestData(numStudents, numOfferings):
 	# plt.show()
 
 
+	return students, offerings
+
+# get randomized popularities of each intensive, summing to 1
 def getPopularities(n):
     nums = [uniform(0, 1) for i in range(n)]
     sum_ = 0
