@@ -1,7 +1,7 @@
 
 Tasks to do:
 
-- functionality for generating realistic test data
+- functionality for generating realistic test data (Accomplished? -- look into the way we generate popularities)
 
 - implement acceptable solution of CSP
 
