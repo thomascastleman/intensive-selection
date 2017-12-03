@@ -18,35 +18,35 @@ def main():
 
 	# EXTREMELY UNREASONABLE TEST DATA: (FOR EVAL TESTING)
 
-	# from random import randint
-	# from classes.Offering import Offering
-	# from classes.Student import Student
+	from random import randint
+	from classes.Offering import Offering
+	from classes.Student import Student
 
-	# students = []
-	# offerings = []
+	students = []
+	offerings = []
 
-	# for i in range(20):
-	# 	o = Offering(i, randint(20, 30), randint(9, 12), randint(13, 18))
-	# 	offerings.append(o)
-	# 	idToOfferings[i] = o
+	for i in range(20):
+		o = Offering(i, randint(20, 30), randint(9, 12), randint(13, 18))
+		offerings.append(o)
+		idToOfferings[i] = o
 
-	# for i in range(400):
-	# 	s = Student(i, randint(13, 18), randint(9, 12), [])
+	for i in range(400):
+		s = Student(i, randint(13, 18), randint(9, 12), [])
 
-	# 	off = offerings[randint(0, len(offerings) - 1)]
-	# 	s.curOfferingID = off.id
-	# 	off.curSubscribed += 1
+		off = offerings[randint(0, len(offerings) - 1)]
+		s.curOfferingID = off.id
+		off.curSubscribed += 1
 
 
 
-	# 	for j in range(0, rankSize):
-	# 		s.rank.append(offerings[randint(0, len(offerings) - 1)].id)
+		for j in range(0, rankSize):
+			s.rank.append(offerings[randint(0, len(offerings) - 1)].id)
 
-	# 	students.append(s)
+		students.append(s)
 
-	# 	idToStudents[i] = s
+		idToStudents[i] = s
 
-	# evaluate(students, offerings)
+	evaluate(students, offerings)
 
 
 	
