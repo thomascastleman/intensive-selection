@@ -161,7 +161,33 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 	print "\n\nPROCESS FINISHED WITH NET CONFLICT: ", netConflict
 
+	valid = testValidity(studentList, offeringList, idToOfferings)
+	print "OVERALL VALID? ", valid
 
 
-def testValidity(studentList, offeringList):
+
+def testValidity(studentList, offeringList, idToOfferings):
 	
+	ageGradeViolations = 0
+	for stu in studentList:
+		if not isLegal((stu, idToOfferings[stu.curOfferingID])):
+			ageGradeViolations += 1
+
+	print "AGE / GRADE RESTRICTIONS: "
+	if ageGradeViolations > 0:
+		print "Solution NOT valid: ", ageGradeViolations, " violations"
+	else:
+		print "Solution VALID"
+
+	capViolations = 0
+	for off in offeringList:
+		if off.curSubscribed > off.maxCapacity:
+			capViolations += 1
+
+	print "CAPACITY RESTRICTIONS: "
+	if capViolations > 0:
+		print "Solution NOT valid: ", capViolations, " violations"
+	else:
+		print "Solution VALID"
+
+	return ageGradeViolations == 0 and capViolations == 0
