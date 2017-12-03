@@ -22,3 +22,20 @@ def staticCost(pair):
 def isLegal(pair):
 	student, offering = pair
 	return student.isGhost or (student.grade >= offering.minGrade and student.age >= offering.minAge)
+
+# calculate age priority values for all students in a given set
+def initAllAgeP(students):
+	if apCoeff != 0.0:
+		minAge = students[0].age
+		maxAge = students[0].age
+
+		for student in students:
+			if student.age < minAge:
+				minAge = student.age
+			elif student.age > maxAge: 
+				maxAge = student.age
+
+		ageRange = maxAge - minAge
+
+		for student in students:
+			student.ageP = (maxAge - student.age + 1) / ageRange
