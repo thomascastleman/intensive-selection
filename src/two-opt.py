@@ -1,15 +1,14 @@
 # IMPLEMENTATION OF TWO-OPT SOLUTION
 
 from random import randrange
-from main import *	# access to ID hashmaps
 from util import *	# access to cost functions / legality checking
 from acceptable_solution import buildAcceptableSolution
 
 # void, updates properties of Student obj 
-def two_opt(studentList, offeringList):
+def two_opt(studentList, offeringList, idToOfferings):
 	
 	buildAcceptableSolution(studentList, offeringList)	# construct initial matching
-	currentCost = getSoftCostOfAllPairs(studentList)	# calculate soft cost of all pairs
+	currentCost = getSoftCostOfAllPairs(studentList, idToOfferings)	# calculate soft cost of all pairs
 	addAllGhostStudents(studentList, offeringList)	# now add ghosts (since they have no cost)
 
 	temp = 100.0	# temperature for simulated annealing
@@ -20,10 +19,10 @@ def two_opt(studentList, offeringList):
 		indA, indB = getRandomIndices(len(studentList))
 
 		studentA = studentList[indA]
-		offeringA = idToOffering[studentA.curOfferingID]
+		offeringA = idToOfferings[studentA.curOfferingID]
 
 		studentB = studentList[indB]
-		offeringB = idToOffering[studentB.curOfferingID]
+		offeringB = idToOfferings[studentB.curOfferingID]
 
 		# make swap pairs
 		swap1 = (studentA, offeringB)
@@ -56,11 +55,11 @@ def getRandomIndices(lenOfMatching):
 	return (rand1, rand2)
 
 # sum soft cost across all pairings
-def getSoftCostOfAllPairs(students):
+def getSoftCostOfAllPairs(students, idToOfferings):
 	cost = 0
 	for student in students:
 		if not student.isGhost:
-			offering = idToOffering[student.curOfferingID]	# get paired offering
+			offering = idToOfferings[student.curOfferingID]	# get paired offering
 			cost += softCost((student, offering))			# add soft cost to total
 	return cost
 

@@ -14,7 +14,7 @@ Offerings:
 
 from classes.Student import Student
 from classes.Offering import Offering
-from main import rankSize, idToStudents, idToOfferings
+from main import rankSize
 
 from random import randint, uniform
 
@@ -23,7 +23,7 @@ import matplotlib.cm as cm
 import numpy as np
 
 # generate reasonable Student and Offering objects to test implementations
-# returns tuple of ([student objects], [offering objects])
+# returns tuple of ([student objects], [offering objects], {id to students}, {id to offerings})
 def generateTestData(numStudents, numOfferings):
 
 	# # for visualization:
@@ -32,6 +32,7 @@ def generateTestData(numStudents, numOfferings):
 	allGrades = [9, 10, 11, 12]		# grade levels
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
 	students, offerings = [], []	# arrays to hold objects
+	idToStudents, idToOfferings = {}, {}	# local hashmaps
 	
 	# the way I'm doing it these are probably too uniform
 	popularities = getPopularities(numOfferings)	# 0-1 that sum to 1
@@ -86,8 +87,7 @@ def generateTestData(numStudents, numOfferings):
 	 
 	# plt.show()
 
-
-	return students, offerings
+	return students, offerings, idToStudents, idToOfferings
 
 # get randomized popularities of each intensive, summing to 1
 def getPopularities(n):

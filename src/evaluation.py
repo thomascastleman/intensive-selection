@@ -11,9 +11,9 @@ Give stats like:
 
 """
 
-from main import rankSize, idToOfferings, idToStudents
+from main import rankSize
 
-def evaluate(studentList, offeringList):
+def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 
 	choices = [0 for i in range(rankSize + 1)]	# number of students receiving each choice
 	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades

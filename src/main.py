@@ -9,10 +9,6 @@ rpCoeff = 1.0	# rank priority
 gpCoeff = 1.0	# grade priority
 apCoeff = 1.0	# age priority
 
-# hashmaps of IDs to objects:
-idToOfferings = {}
-idToStudents = {}
-
 
 """ --------------------------------------------------- """
 
@@ -20,14 +16,22 @@ import NonUniformTestData as td
 
 def main():
 
-	students, offerings = td.generateTestData(400, 20)
+	# construct all objects, and hashmaps
+	students, offerings, idToStudents, idToOfferings = td.generateTestData(50, 5)
 
-	print "\n\nSTUDENTS: "
-	for stu in students:
-		stu.log()
-	print "\n\nOFFERINGS: "
-	for off in offerings:
-		off.log()
+	# print "\n\nSTUDENTS: "
+	# for stu in students:
+	# 	stu.log()
+	# print "\n\nOFFERINGS: "
+	# for off in offerings:
+	# 	off.log()
+
+	
+
+
+
+
+
 
 if __name__ == "__main__":
 	main()
