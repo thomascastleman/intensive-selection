@@ -46,7 +46,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 
 	# DEBUG
-	print "INITIAL NET CONFLICT: ", netConflict
+	print "INITIAL NET CONFLICT:", netConflict
 
 	# print "STUXOFF: "
 	# for row in stuXoff:
@@ -59,7 +59,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 	while netConflict > 0:
 
-		print "Iteration ", iterations, " Temp at ", temperature
+		print "\nIteration ", iterations, " Temp at ", temperature
 		
 		if uniform(0, 1) > temperature:
 
@@ -105,6 +105,8 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 			newOff = offWithMinCost
 
 		else:
+			print "RANDOMIZING"
+
 			# randomize student
 			stu = studentList[randint(0, len(studentList) - 1)]
 
@@ -119,7 +121,10 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 			newOff = offeringList[randint(0, len(offeringList) - 1)]
 
-
+			# calculated stuXoff values
+			if not alreadyCalculated[stu.id]:
+				stuXoff[stu.id][previousOff.id] = staticCost((stu, previousOff))
+				stuXoff[stu.id][newOff.id] = staticCost((stu, newOff))
 
 		print "Previous true cost: ", stuXoff[stu.id][previousOff.id], " + ", previousOff.capacityCost
 
@@ -156,7 +161,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 		# DEBUG: 
 
-		print "NET CONFLICT NOW == ", netConflict
+		print "NET CONFLICT NOW ==\t\t\t\t", netConflict
 
 
 	print "\n\nPROCESS FINISHED WITH NET CONFLICT: ", netConflict
