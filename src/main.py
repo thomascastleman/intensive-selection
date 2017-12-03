@@ -20,7 +20,7 @@ import NonUniformTestData as td
 
 def main():
 
-	students, offerings = td.generateTestData(40, 10)
+	students, offerings = td.generateTestData(400, 20)
 
 	print "\n\nSTUDENTS: "
 	for stu in students:

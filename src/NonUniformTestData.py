@@ -26,6 +26,9 @@ import numpy as np
 # returns tuple of ([student objects], [offering objects])
 def generateTestData(numStudents, numOfferings):
 
+	# for graph:
+	totals = [0 for i in range(numOfferings)]
+
 	allGrades = [9, 10, 11, 12]		# grade levels
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
 	students, offerings = [], []	# arrays to hold objects
@@ -44,13 +47,18 @@ def generateTestData(numStudents, numOfferings):
 		# generate non-uniformly distributed rank
 		rank = np.random.choice(numOfferings, rankSize, replace=False, p=popularities)
 
+
+		# visualization:
+		for r in rank:
+			totals[r] += 1
+
 		s = Student(stuID, age, grade, rank)	# construct student
 		idToStudents[stuID] = s					# add to global ID hashmap
 		students.append(s)						# add to students array
 
 	# create as many offerings as requested
 	for offID in range(numOfferings):
-		maxCap = int(numStudents / numOfferings) + randint(-5, 5)	# this is up for debate
+		maxCap = abs(int(numStudents / numOfferings) + randint(-5, 5))	# this is up for debate
 		minGrade, minAge = 9, 0		# init at defaults
 		if uniform(0, 1) < 0.2:
 			# apply grade restriction
@@ -65,6 +73,18 @@ def generateTestData(numStudents, numOfferings):
 		off = Offering(offID, maxCap, minGrade, minAge)		# construct offering
 		idToOfferings[offID] = off							# add to global ID hashmap
 		offerings.append(off)								# add to offerings array
+
+
+	y_pos = np.arange(numOfferings)
+	 
+	plt.bar(y_pos, totals, align='center', alpha=0.5)
+	plt.xticks(y_pos, y_pos)
+	plt.ylabel('Frequency')
+	plt.xlabel('Intensive Choice')
+
+	plt.title('Choice Frequency')
+	 
+	plt.show()
 
 
 	return students, offerings
