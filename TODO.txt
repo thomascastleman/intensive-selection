@@ -1,7 +1,7 @@
 
 Tasks to do:
 
-- implement acceptable solution of CSP
+- tune CSP so can handle large input
 
 - implement Hosp / Res solution from Glasgow paper
 
