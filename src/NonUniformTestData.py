@@ -14,7 +14,7 @@ Offerings:
 
 from classes.Student import Student
 from classes.Offering import Offering
-from main import rankSize, 
+from main import rankSize, idToStudents, idToOfferings
 
 from random import randint, uniform
 
@@ -31,11 +31,11 @@ def generateTestData(numStudents, numOfferings):
 	students, offerings = [], []	# arrays to hold objects
 	
 	# NEED TO GENERATE THESE POPULARITIES (SUM TO 1, length: numOfferings) ??? 
-	popularities = [] 				# 0-1 that sum to 1
+	popularities = getPopularities(numOfferings)	# 0-1 that sum to 1
 
 	# create as many students as requested
 	for stuID in range(numStudents):
-		grade = allGrades[randint(len(allGrades) - 1)]	# choose random grade
+		grade = allGrades[randint(0, len(allGrades) - 1)]	# choose random grade
 		age = normalAges[allGrades.index(grade)] + randint(-1, 1)	# age correlates, plus or minus 1
 
 		# generate non-uniformly distributed rank
@@ -52,10 +52,12 @@ def generateTestData(numStudents, numOfferings):
 		if uniform(0, 1) < 0.2:
 			# apply grade restriction
 			if uniform(0, 1) < 0.5:
-
+				# 11th grade likely to be min grade
+				minGrade = np.random.choice(allGrades, 1, p=[0.0625, 0.1875, 0.6, 0.15])[0]
 			# apply age restriction
 			else:
-
+				# higher ages more likely to be min age, if any restrictions imposed
+				minAge = np.random.choice(normalAges, 1, p=[0.0625, 0.1875, 0.25, 0.5])[0]
 
 		off = Offering(offID, maxCap, minGrade, minAge)		# construct offering
 		idToOfferings[offID] = off							# add to global ID hashmap
@@ -93,3 +95,14 @@ def generateTestData(numStudents, numOfferings):
 	# plt.title('Choice Frequency')
 	 
 	# plt.show()
+
+
+def getPopularities(n):
+    nums = [uniform(0, 1) for i in range(n)]
+    sum_ = 0
+    for num in nums:
+            sum_ += num
+    for i in range(n):
+            nums[i] /= sum_
+
+    return nums

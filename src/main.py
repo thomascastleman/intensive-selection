@@ -13,6 +13,7 @@ idToStudents = {}
 """ --------------------------------------------------- """
 
 from evaluation import *
+from NonUniformTestData import generateTestData
 
 def main():
 
@@ -47,6 +48,15 @@ def main():
 	# 	idToStudents[i] = s
 
 	# evaluate(students, offerings)
+
+	students, offerings = generateTestData(20, 5)
+
+	print "\n\nSTUDENTS: "
+	for stu in students:
+		stu.log()
+	print "\n\nOFFERINGS: "
+	for off in offerings:
+		off.log()
 
 
 	
