@@ -61,7 +61,7 @@ def generateTestData(numStudents, numOfferings):
 
 	# create as many offerings as requested
 	for offID in range(numOfferings):
-		maxCap = abs(int(numStudents / numOfferings)) * 1.25
+		maxCap = int(numStudents / numOfferings * 1.25)
 		totalCapacity += maxCap
 		minGrade, minAge = 9, 0		# init at defaults
 		if uniform(0, 1) < 0.15:

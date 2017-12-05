@@ -26,10 +26,14 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 		possible = []
 		for off in offeringList:
-			if isLegal((student, off)):
+			if isLegal((student, off)) and off.curSubscribed < off.maxCapacity:
 				possible.append(off)
 
-		offering = possible[randint(0, len(possible) - 1)]
+		if len(possible) == 0:
+			offering = offeringList[randint(0, len(offeringList) - 1)]
+		else: 
+			offering = possible[randint(0, len(possible) - 1)]
+		
 		offID = offering.id
 		student.curOfferingID = offID
 
@@ -57,7 +61,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 	restartTemp = 100.0
 	restartRate = 0.999
 	temperature = 100.0
-	rate = 0.8
+	rate = 0.999 # 0.8
 
 	iterations = 0
 
@@ -73,16 +77,17 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 			# find pair with highest cost
 			for offering in offeringList:
-				# get first student on offering's PQ
-				student = idToStudents[offering.pq.queue[0][1]]
-				
-				# calculate "true" cost (static cost + oversubscribed cost)
-				trueCost = stuXoff[student.id][offering.id] + offering.capacityCost
+				if len(offering.pq.queue) > 0:
+					# get first student on offering's PQ
+					student = idToStudents[offering.pq.queue[0][1]]
+					
+					# calculate "true" cost (static cost + oversubscribed cost)
+					trueCost = stuXoff[student.id][offering.id] + offering.capacityCost
 
-				# update if new max found
-				if maxCost == None or trueCost > maxCost:
-					maxCost = trueCost
-					offWithMaxCost = offering
+					# update if new max found
+					if maxCost == None or trueCost > maxCost:
+						maxCost = trueCost
+						offWithMaxCost = offering
 
 			stu = idToStudents[offWithMaxCost.pq.get()[1]]	# get student object
 
@@ -151,11 +156,11 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 		temperature *= rate
 
 		if temperature < 0.0005: # restartTemp / 4.0:
-			temperature = restartTemp
-			restartTemp *= restartRate
+			temperature = 100.0 # restartTemp
+			# restartTemp *= restartRate
 
-			if restartTemp < 0.0005:
-				restartTemp = 100.0
+			# if restartTemp < 0.0005:
+			# 	restartTemp = 100.0
 			print "TEMP RESET @ iter=", iterations, " conflict=", netConflict, ", restart=", restartTemp
 
 		iterations += 1
