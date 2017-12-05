@@ -2,20 +2,24 @@
 
 from random import randrange
 from util import *	# access to cost functions / legality checking
-from acceptable_solution import buildAcceptableSolution
 
 # void, updates properties of Student obj 
 def two_opt(studentList, offeringList, idToOfferings):
 	
-	buildAcceptableSolution(studentList, offeringList)	# construct initial matching
-	initAllAgeP(studentList)	# initialize age priorities
 	currentCost = getSoftCostOfAllPairs(studentList, idToOfferings)	# calculate soft cost of all pairs
 	addAllGhostStudents(studentList, offeringList)	# now add ghosts (since they have no cost)
 
+	print "INITIAL NET SOFT COST: ", currentCost
+	initCost = currentCost
+
 	temp = 100.0	# temperature for simulated annealing
-	rate = 0.99		# rate of temperature decrease
+	rate = 0.999		# rate of temperature decrease
+	iteration = 0	# iteration counter
 
 	while temp > 0.0001:
+
+		print "Iteration ", iteration, " temp=", temp, " cost=", currentCost
+
 		# get random pairs
 		indA, indB = getRandomIndices(len(studentList))
 
@@ -33,20 +37,28 @@ def two_opt(studentList, offeringList, idToOfferings):
 		if isLegal(swap1) and isLegal(swap2):
 			# calculate tentative cost as updated by swap
 			tentativeCost = currentCost
-			tentativeCost -= (softCost((studentA, offeringA)) + softCost(studentB, offeringB))
-			tentativeCost += (softCost(swap1) + softCost(swap2))
+			tentativeCost -= softCost((studentA, offeringA)) + softCost((studentB, offeringB))
+			tentativeCost += softCost(swap1) + softCost(swap2)
 
 			# if swap beneficial OR probabilistic
 			if tentativeCost < currentCost or randrange(0, 100) < temp:
 				# make swap
 				studentA.curOfferingID = offeringB.id
 				studentB.curOfferingID = offeringA.id
+
+				currentCost = tentativeCost
 			
 			temp *= rate
 
+		iteration += 1
+
+	
+	print iteration - 1, " iterations"
+	print "Net change in cost: ", initCost - currentCost
+
 # get two random indices in a matching
-def getRandomIndices(lenOfMatching):
-	possibleIndices = [i for i in range(lenOfMatching)]
+def getRandomIndices(numStudents):
+	possibleIndices = [i for i in range(numStudents)]
 
 	rand1 = possibleIndices[randrange(0, len(possibleIndices))]
 	possibleIndices.remove(rand1)

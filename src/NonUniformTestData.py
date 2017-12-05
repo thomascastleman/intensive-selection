@@ -48,7 +48,7 @@ def generateTestData(numStudents, numOfferings):
 		age = normalAges[allGrades.index(grade)] + np.random.choice([-1, 0, 1], 1, p=[0.25, 0.5, 0.25])[0]
 
 		# generate non-uniformly distributed rank
-		rank = np.random.choice(numOfferings, rankSize, replace=False, p=popularities)
+		rank = (np.random.choice(numOfferings, rankSize, replace=False, p=popularities)).tolist()
 
 
 		# # visualization:

@@ -1,6 +1,6 @@
 # UTILITIES / COST FUNCTIONS ETC.
 
-from main import rpCoeff, gpCoeff, apCoeff
+from main import rankSize, rpCoeff, gpCoeff, apCoeff
 
 # calculate cost of a pair with respect to PRIORITIES (weighted with coefficients)
 def softCost(pair):
