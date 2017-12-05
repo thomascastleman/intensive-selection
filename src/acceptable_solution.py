@@ -13,6 +13,26 @@ DOES NOT add ghost students
 from random import randint, uniform
 from util import *
 
+def cspSolution(students, offerings, idToStudents, idToOfferings):
+	ordered, noRestrict = [], []
+	for off in offerings:
+		if off.minGrade > 9 or off.minAge > 0:
+			ordered.append(off)
+		else:
+			noRestrict.append(off)
+
+	ordered.extend(noRestrict)
+
+	for stu in students:
+		for off in ordered:
+			if isLegal((stu, off)) and off.curSubscribed < off.maxCapacity:
+				stu.curOfferingID = off.id
+				off.curSubscribed += 1
+				break
+		if stu.curOfferingID == None:
+			print "SOLUTION NOT FOUND"
+			return None
+
 def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferings):
 	
 	netConflict = 0
@@ -20,7 +40,6 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 	# students cross offerings: holds all static costs calculated for pairs
 	stuXoff = [[0 for i in range(len(offeringList))] for j in range(len(studentList))]
-
 
 	for student in studentList:
 

@@ -1,6 +1,8 @@
 
 Tasks to do:
 
+- maybe rewrite and simplify CSP solution
+
 - implement Hosp / Res solution from Glasgow paper
 
 - is a GA still on the table?
