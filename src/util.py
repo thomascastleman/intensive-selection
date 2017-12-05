@@ -38,4 +38,4 @@ def initAllAgeP(students):
 		ageRange = maxAge - minAge
 
 		for student in students:
-			student.ageP = (maxAge - student.age + 1) / ageRange
+			student.ageP = (maxAge - student.age + 1) / float(ageRange)

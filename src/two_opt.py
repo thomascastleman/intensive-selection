@@ -1,6 +1,6 @@
 # IMPLEMENTATION OF TWO-OPT SOLUTION
 
-from random import randrange
+from random import randint, uniform
 from util import *	# access to cost functions / legality checking
 
 # void, updates properties of Student obj 
@@ -13,12 +13,12 @@ def two_opt(studentList, offeringList, idToOfferings):
 	initCost = currentCost
 
 	temp = 100.0	# temperature for simulated annealing
-	rate = 0.999		# rate of temperature decrease
+	rate = 0.9999	# rate of temperature decrease
 	iteration = 0	# iteration counter
 
 	while temp > 0.0001:
 
-		print "Iteration ", iteration, " temp=", temp, " cost=", currentCost
+		# print "Iteration ", iteration, " temp=", temp, " cost=", currentCost
 
 		# get random pairs
 		indA, indB = getRandomIndices(len(studentList))
@@ -41,7 +41,7 @@ def two_opt(studentList, offeringList, idToOfferings):
 			tentativeCost += softCost(swap1) + softCost(swap2)
 
 			# if swap beneficial OR probabilistic
-			if tentativeCost < currentCost or randrange(0, 100) < temp:
+			if tentativeCost < currentCost or uniform(0, 100) < temp:
 				# make swap
 				studentA.curOfferingID = offeringB.id
 				studentB.curOfferingID = offeringA.id
@@ -52,18 +52,18 @@ def two_opt(studentList, offeringList, idToOfferings):
 
 		iteration += 1
 
-	
 	print iteration - 1, " iterations"
+	print "Final cost: ", currentCost
 	print "Net change in cost: ", initCost - currentCost
 
 # get two random indices in a matching
 def getRandomIndices(numStudents):
 	possibleIndices = [i for i in range(numStudents)]
 
-	rand1 = possibleIndices[randrange(0, len(possibleIndices))]
+	rand1 = possibleIndices[randint(0, len(possibleIndices) - 1)]
 	possibleIndices.remove(rand1)
 
-	rand2 = possibleIndices[randrange(0, len(possibleIndices))]
+	rand2 = possibleIndices[randint(0, len(possibleIndices) - 1)]
 
 	return (rand1, rand2)
 
@@ -88,3 +88,11 @@ def addAllGhostStudents(students, offerings):
 			students.append(ghost)
 			# increase subscription count
 			offering.curSubscribed += 1
+
+# remove ghost students
+def removeAllGhostStudents(students):
+	newStuList = []
+	for stu in students:
+		if not stu.isGhost:
+			newStuList.append(stu)
+	return newStuList
