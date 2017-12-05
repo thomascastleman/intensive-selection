@@ -88,6 +88,7 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	plt.xlabel('Choice (' + str(rankSize + 1) + ' arb)')
 	plt.ylabel('Students')
 	plt.title('Students per choice')
+
 	plt.show()
 
 	grd = [i + 9 for i in range(4)]
