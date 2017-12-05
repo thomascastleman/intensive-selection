@@ -11,6 +11,9 @@ Give stats like:
 
 """
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 from main import rankSize
 
 def evaluate(studentList, offeringList, idToStudents, idToOfferings):
@@ -60,8 +63,11 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	minPercent = None
 	maxPercent = None
 
+	subscribed = []
+
 	print "ID\tPercent of capacity filled"
 	for offering in offeringList:
+		subscribed.append(offering.curSubscribed)
 		percentage = float(offering.curSubscribed) / offering.maxCapacity * 100.0
 		print str(offering.id) + ": \t{:.3f}%".format(percentage)
 
@@ -76,3 +82,26 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	print "Max Percent Full: {:.3f}%".format(maxPercent)
 
 	print "\n-------------------------------------------------------------------"
+
+	ch = [i for i in range(1, rankSize + 2)]
+	plt.bar(ch, choices, align='center', alpha=0.5)
+	plt.xlabel('Choice (' + str(rankSize + 1) + ' arb)')
+	plt.ylabel('Students')
+	plt.title('Students per choice')
+	plt.show()
+
+	grd = [i + 9 for i in range(4)]
+	plt.bar(grd, grades, align='center', alpha=0.5)
+	plt.xticks(np.arange(9, 13))
+	plt.xlabel('Grade')
+	plt.ylabel('Students')
+	plt.title('Students per grade with first choice')
+	plt.show()
+
+	off = [i + 1 for i in range(len(offeringList))]
+	plt.bar(off, subscribed, align='center', alpha=0.5)
+	plt.xticks(np.arange(1, len(offeringList) + 1))
+	plt.xlabel('Offering')
+	plt.ylabel('Students')
+	plt.title('Student Distribution')
+	plt.show()

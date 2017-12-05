@@ -16,7 +16,7 @@ class Student:
 			# grade priority: in range (0, 1), equal to student's inverse grade value (1-4 for 12-9) over num possible grades (4)
 			self.gradeP = ([12, 11, 10, 9].index(self.grade) + 1) / 4.0
 			# age priority: in range (0, 1), equal to inverse age value relative to age range, (1-n, max-min) over age range
-			self.ageP = None
+			self.ageP = 0.0
 
 	# for DEBUG
 	def log(self):

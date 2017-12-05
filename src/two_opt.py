@@ -90,9 +90,12 @@ def addAllGhostStudents(students, offerings):
 			offering.curSubscribed += 1
 
 # remove ghost students
-def removeAllGhostStudents(students):
+def removeAllGhostStudents(students, idToOfferings):
 	newStuList = []
 	for stu in students:
 		if not stu.isGhost:
 			newStuList.append(stu)
+		else:
+			off = idToOfferings[stu.curOfferingID]
+			off.curSubscribed -= 1
 	return newStuList

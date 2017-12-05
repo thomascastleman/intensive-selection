@@ -9,7 +9,7 @@ def softCost(pair):
 		return 0
 	else:
 		# rank priority: in range (0, 1), equal to position of offering on student's rank over num possible positions (rankSize + 1)
-		rankP = 1 if offering.id not in student.rank else (student.rank.index(offering.id) + 1) / (rankSize + 1)
+		rankP = 1 if offering.id not in student.rank else (student.rank.index(offering.id) + 1) / float(rankSize + 1)
 
 		return (rpCoeff * rankP) + (gpCoeff * student.gradeP) + (apCoeff * student.ageP)
 

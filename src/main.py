@@ -7,7 +7,7 @@ rankSize = 5
 # Priority coefficients
 rpCoeff = 1.0	# rank priority
 gpCoeff = 1.0	# grade priority
-apCoeff = 1.0	# age priority
+apCoeff = 0.0	# age priority
 
 
 """ --------------------------------------------------- """
@@ -47,7 +47,7 @@ def main():
 
 	# run two-opt
 	tpt.two_opt(students, offerings, idToOfferings)
-	students = tpt.removeAllGhostStudents(students)
+	students = tpt.removeAllGhostStudents(students, idToOfferings)
 
 	# evaluate final solution
 	ev.evaluate(students, offerings, idToStudents, idToOfferings)
