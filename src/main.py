@@ -2,12 +2,12 @@
 """ GLOBAL VARS: -------------------------------------- """
 
 # number of offerings each student ranks
-rankSize = 5
+RANKSIZE = 5
 
 # Priority coefficients
-rpCoeff = 1.0	# rank priority
-gpCoeff = 0.5	# grade priority
-apCoeff = 0.0	# age priority
+RPCOEFF = 1.0	# rank priority
+GPCOEFF = 0.5	# grade priority
+APCOEFF = 0.0	# age priority
 
 
 """ --------------------------------------------------- """

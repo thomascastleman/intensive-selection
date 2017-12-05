@@ -1,6 +1,6 @@
 # UTILITIES / COST FUNCTIONS ETC.
 
-from main import rankSize, rpCoeff, gpCoeff, apCoeff
+from main import RANKSIZE, RPCOEFF, GPCOEFF, APCOEFF
 
 # calculate cost of a pair with respect to PRIORITIES (weighted with coefficients)
 def softCost(pair):
@@ -8,10 +8,10 @@ def softCost(pair):
 	if student.isGhost:
 		return 0
 	else:
-		# rank priority: in range (0, 1), equal to position of offering on student's rank over num possible positions (rankSize + 1)
-		rankP = 1 if offering.id not in student.rank else (student.rank.index(offering.id) + 1) / float(rankSize + 1)
+		# rank priority: in range (0, 1), equal to position of offering on student's rank over num possible positions (RANKSIZE + 1)
+		rankP = 1 if offering.id not in student.rank else (student.rank.index(offering.id) + 1) / float(RANKSIZE + 1)
 
-		return (rpCoeff * rankP) + (gpCoeff * student.gradeP) + (apCoeff * student.ageP)
+		return (RPCOEFF * rankP) + (GPCOEFF * student.gradeP) + (APCOEFF * student.ageP)
 
 # calculate cost of a pair with respect to the age / grade HARD CONSTRAINTS (does not factor in capacity cost)
 def staticCost(pair):
@@ -25,7 +25,7 @@ def isLegal(pair):
 
 # calculate age priority values for all students in a given set
 def initAllAgeP(students):
-	if apCoeff != 0.0:
+	if APCOEFF != 0.0:
 		minAge = students[0].age
 		maxAge = students[0].age
 

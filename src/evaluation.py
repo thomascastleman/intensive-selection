@@ -14,11 +14,11 @@ Give stats like:
 import numpy as np
 import matplotlib.pyplot as plt
 
-from main import rankSize
+from main import RANKSIZE
 
 def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 
-	choices = [0 for i in range(rankSize + 1)]	# number of students receiving each choice
+	choices = [0 for i in range(RANKSIZE + 1)]	# number of students receiving each choice
 	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades
 	gradeCounts = [0 for i in range(4)]	# total number of people in each grade
 
@@ -28,7 +28,7 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 
 		# get position on student's rank
 		if offering.id not in student.rank:
-			index = rankSize
+			index = RANKSIZE
 		else:
 			index = student.rank.index(offering.id)
 
@@ -83,9 +83,9 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 
 	print "\n-------------------------------------------------------------------"
 
-	ch = [i for i in range(1, rankSize + 2)]
+	ch = [i for i in range(1, RANKSIZE + 2)]
 	plt.bar(ch, choices, align='center', alpha=0.5)
-	plt.xlabel('Choice (' + str(rankSize + 1) + ' arb)')
+	plt.xlabel('Choice (' + str(RANKSIZE + 1) + ' arb)')
 	plt.ylabel('Students')
 	plt.title('Students per choice')
 
