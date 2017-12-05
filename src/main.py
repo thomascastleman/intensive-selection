@@ -20,6 +20,24 @@ def main():
 	# construct all objects, and hashmaps
 	students, offerings, idToStudents, idToOfferings = td.generateTestData(400, 20)
 
+	# age = 0
+	# grade = 0
+	# totalCap = 0
+
+	# for off in offerings:
+	# 	if off.minGrade > 9:
+	# 		grade += 1
+	# 	if off.minAge > 0:
+	# 		age += 1
+
+	# 	totalCap += off.maxCapacity
+
+	# 	off.log()
+
+	# print age, " offerings with age restrictions"
+	# print grade, " offerings with grade restrictions"
+	# print totalCap - len(students), " extra positions"
+
 	# build solution
 	csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
 

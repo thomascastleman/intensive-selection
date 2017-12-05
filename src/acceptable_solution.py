@@ -150,7 +150,7 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 		temperature *= rate
 
-		if temperature < restartTemp / 4.0:
+		if temperature < 0.0005: # restartTemp / 4.0:
 			temperature = restartTemp
 			restartTemp *= restartRate
 

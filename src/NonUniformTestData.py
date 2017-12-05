@@ -61,10 +61,10 @@ def generateTestData(numStudents, numOfferings):
 
 	# create as many offerings as requested
 	for offID in range(numOfferings):
-		maxCap = abs(int(numStudents / numOfferings) + randint(-2, 2))	# this is up for debate
+		maxCap = abs(int(numStudents / numOfferings)) * 1.25
 		totalCapacity += maxCap
 		minGrade, minAge = 9, 0		# init at defaults
-		if uniform(0, 1) < 0.2:
+		if uniform(0, 1) < 0.15:
 			# apply grade restriction
 			if uniform(0, 1) < 0.5:
 				# 11th grade likely to be min grade
