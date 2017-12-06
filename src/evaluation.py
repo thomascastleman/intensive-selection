@@ -21,6 +21,7 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	choices = [0 for i in range(RANKSIZE + 1)]	# number of students receiving each choice
 	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades
 	gradeCounts = [0 for i in range(4)]	# total number of people in each grade
+	percentFirstPerGrade = []
 
 	for student in studentList:
 		
@@ -56,6 +57,7 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	print "\nPercentage first choice per grade"
 	for i in range(len(grades)):
 		percentage = float(grades[i]) / gradeCounts[i] * 100.0
+		percentFirstPerGrade.append(percentage)
 		print "Grade " + str(i + 9) + ":\t{:.3f}%".format(percentage)
 
 	print "\nPercentage full for each offering:\n"
@@ -93,11 +95,12 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 	plt.show()
 
 	grd = [i + 9 for i in range(4)]
-	plt.bar(grd, grades, align='center', alpha=0.5)
+	plt.bar(grd, percentFirstPerGrade, align='center', alpha=0.5)
 	plt.xticks(np.arange(9, 13))
+	plt.ylim((0, 100))
 	plt.xlabel('Grade')
-	plt.ylabel('Students')
-	plt.title('Students per grade with first choice')
+	plt.ylabel('Percentage First Choice')
+	plt.title('Percentage of students per grade with first choice')
 	plt.show()
 
 	off = [i + 1 for i in range(len(offeringList))]
