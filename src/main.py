@@ -6,7 +6,7 @@ RANKSIZE = 5
 
 # Priority coefficients
 RPCOEFF = 1.0	# rank priority
-GPCOEFF = 0.5	# grade priority
+GPCOEFF = 0.0	# grade priority
 APCOEFF = 0.0	# age priority
 
 
@@ -27,7 +27,7 @@ def main():
 
 	# evaluate final solution
 	print "\nRunning Evaluation..."
-	ev.evaluate(students, offerings, idToStudents, idToOfferings, False)
+	ev.evaluate(students, offerings, idToStudents, idToOfferings, True)
 
 # run a full 2-opt solution on a set of student and offering objects
 def runTwoOpt(students, offerings, idToStudents, idToOfferings):
