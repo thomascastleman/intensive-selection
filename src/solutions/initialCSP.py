@@ -2,17 +2,16 @@
 
 Construct an acceptable matching of students to offerings (no age, grade, or capacity violations)
 without taking any priority into account,
-using minimum conflicts alg with simulated annealing
 
-Receives lists of Student and Offering objects
-Modifies student and offering properties to create pairs
+Modifies student and offering object properties to create pairs
 DOES NOT add ghost students
 
 """
 
 from random import randint, uniform
-from util import *
+from ..util import *
 
+# backtracking solution to CSP usable for smaller numbers
 def backTrackingSolution(index, students, offerings):
 
 	if index < len(students):
@@ -36,6 +35,7 @@ def backTrackingSolution(index, students, offerings):
 	else:
 		return True
 
+# solve CSP using min-conflicts -- unnecessary unless data is large
 def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferings):
 	
 	netConflict = 0
@@ -192,31 +192,3 @@ def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferin
 
 	valid = testValidity(studentList, offeringList, idToOfferings)
 	print "OVERALL VALID? ", valid
-
-
-# test legality of a matching (good for debugeing)
-def testValidity(studentList, offeringList, idToOfferings):
-	
-	ageGradeViolations = 0
-	for stu in studentList:
-		if not isLegal((stu, idToOfferings[stu.curOfferingID])):
-			ageGradeViolations += 1
-
-	# print "AGE / GRADE RESTRICTIONS: "
-	# if ageGradeViolations > 0:
-	# 	print "Solution NOT valid: ", ageGradeViolations, " violations"
-	# else:
-	# 	print "Solution VALID"
-
-	capViolations = 0
-	for off in offeringList:
-		if off.curSubscribed > off.maxCapacity:
-			capViolations += 1
-
-	# print "CAPACITY RESTRICTIONS: "
-	# if capViolations > 0:
-	# 	print "Solution NOT valid: ", capViolations, " violations"
-	# else:
-	# 	print "Solution VALID"
-
-	return ageGradeViolations == 0 and capViolations == 0

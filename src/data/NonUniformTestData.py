@@ -12,9 +12,8 @@ Offerings:
 
 """
 
-from classes.Student import Student
-from classes.Offering import Offering
-from main import RANKSIZE
+from ..classes.Student import Student
+from ..classes.Offering import Offering
 
 from random import randint, uniform
 
@@ -25,6 +24,9 @@ import numpy as np
 # generate reasonable Student and Offering objects to test implementations
 # returns tuple of ([student objects], [offering objects], {id to students}, {id to offerings})
 def generateTestData(numStudents, numOfferings):
+
+	from .. import main
+	RANKSIZE = main.RANKSIZE
 
 	# # for visualization:
 	# totals = [0 for i in range(numOfferings)]

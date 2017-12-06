@@ -39,3 +39,18 @@ def initAllAgeP(students):
 
 		for student in students:
 			student.ageP = (maxAge - student.age + 1) / float(ageRange)
+
+# test legality of a matching (good for debugeing)
+def testValidity(studentList, offeringList, idToOfferings):
+	
+	ageGradeViolations = 0
+	for stu in studentList:
+		if not isLegal((stu, idToOfferings[stu.curOfferingID])):
+			ageGradeViolations += 1
+
+	capViolations = 0
+	for off in offeringList:
+		if off.curSubscribed > off.maxCapacity:
+			capViolations += 1
+
+	return ageGradeViolations == 0 and capViolations == 0

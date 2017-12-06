@@ -83,12 +83,13 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings):
 
 	print "\n-------------------------------------------------------------------"
 
+	# PLOTS:
+
 	ch = [i for i in range(1, RANKSIZE + 2)]
 	plt.bar(ch, choices, align='center', alpha=0.5)
 	plt.xlabel('Choice (' + str(RANKSIZE + 1) + ' arb)')
 	plt.ylabel('Students')
 	plt.title('Students per choice')
-
 	plt.show()
 
 	grd = [i + 9 for i in range(4)]

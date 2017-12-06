@@ -1,7 +1,7 @@
 # IMPLEMENTATION OF TWO-OPT SOLUTION
 
 from random import randint, uniform
-from util import *	# access to cost functions / legality checking
+from ..util import *	# access to cost functions / legality checking
 
 # void, updates properties of Student obj 
 def two_opt(studentList, offeringList, idToOfferings):
@@ -78,7 +78,7 @@ def getSoftCostOfAllPairs(students, idToOfferings):
 
 # add necessary ghost students to fill out all empty spots
 def addAllGhostStudents(students, offerings):
-	from classes.Student import Student
+	from ..classes.Student import Student
 	for offering in offerings:
 		while offering.curSubscribed < offering.maxCapacity:
 			# create new ghost under this offering
