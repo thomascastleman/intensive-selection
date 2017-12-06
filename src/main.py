@@ -5,7 +5,7 @@
 RANKSIZE = 5
 
 # Priority coefficients
-RPCOEFF = 0.5	# rank priority
+RPCOEFF = 1.0	# rank priority
 GPCOEFF = 1.0	# grade priority
 APCOEFF = 0.0	# age priority
 
