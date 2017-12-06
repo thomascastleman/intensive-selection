@@ -25,6 +25,8 @@ import numpy as np
 # returns tuple of ([student objects], [offering objects], {id to students}, {id to offerings})
 def generateTestData(numStudents, numOfferings):
 
+	print "Generating test data with %d students and %d offerings" % (numStudents, numOfferings)
+
 	from .. import main
 	RANKSIZE = main.RANKSIZE
 
