@@ -13,25 +13,28 @@ DOES NOT add ghost students
 from random import randint, uniform
 from util import *
 
-def cspSolution(students, offerings, idToStudents, idToOfferings):
-	ordered, noRestrict = [], []
-	for off in offerings:
-		if off.minGrade > 9 or off.minAge > 0:
-			ordered.append(off)
-		else:
-			noRestrict.append(off)
+def backTrackingSolution(index, students, offerings):
 
-	ordered.extend(noRestrict)
+	if index < len(students):
+		stu = students[index]	# get student
 
-	for stu in students:
-		for off in ordered:
+		for off in offerings:
+			# if match found for this student
 			if isLegal((stu, off)) and off.curSubscribed < off.maxCapacity:
 				stu.curOfferingID = off.id
 				off.curSubscribed += 1
-				break
-		if stu.curOfferingID == None:
-			print "SOLUTION NOT FOUND"
-			return None
+
+				# if rest of solution also adequate
+				if backTrackingSolution(index + 1, students, offerings):
+					return True
+				else:
+					off.curSubscribed -= 1
+
+		# if no possible match found, backtrack
+		print "Backtracking from index ", index
+		return False
+	else:
+		return True
 
 def buildAcceptableSolution(studentList, offeringList, idToStudents, idToOfferings):
 	
