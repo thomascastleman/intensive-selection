@@ -60,6 +60,11 @@ and logs them to the console. There is also an option for these stats to be plot
 <img src="http://tcastleman.com/imgs/eval.png">
 </p>
 
+In addition, grade-level stats can also be logged. The sample results below demonstrate the effects of raising the grade priority coefficient, as the higher grades are weighted towards better choices.
+<p align="center">
+<img src="http://tcastleman.com/imgs/gradewise.png">
+</p>
+
 ## TEST DATA
 
 In order to test the algorithm and debug, it was necessary to quickly generate reasonable test data, given quantities of students and offerings. To accomplish this, data was produced where:
