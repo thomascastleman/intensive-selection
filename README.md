@@ -32,7 +32,7 @@ Each of these factors may be weighted and scaled to meet the needs of the user, 
 
 ## ALGORITHM SUMMARY
 
-The solution uses a combination of a backtracking technique and the <a href="https://en.wikipedia.org/wiki/2-opt" target="_blank">2-opt local search algorithm</a> for optimization.
+The solution uses a combination of a <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking technique</a> and the <a href="https://en.wikipedia.org/wiki/2-opt" target="_blank">2-opt local search algorithm</a> for optimization.
 
 Backtracking is used to solve the initial constraint satisfaction problem of creating a matching that does not violate any hard constraints, since the capacity constraints are relaxed enough that it is feasible to use this approach without running into issues of time complexity. 
 
@@ -44,7 +44,7 @@ Backtracking is used to solve the initial constraint satisfaction problem of cre
 <img src="http://tcastleman.com/imgs/choice_results.png">
 </p>
 
-Thus far, matchings with upwards of 70% of students with their first choice are feasible, and constructed within seconds. Sample results from a 400 student, 20 offering matching are displayed above.
+Thus far, matchings with **upwards of 70% of students with their first choice** are feasible, and constructed within seconds. Sample results from a 400 student, 20 offering matching are displayed above.
 
 ## EVALUATION
 
@@ -66,7 +66,7 @@ In order to test the algorithm and debug, it was necessary to quickly generate r
 
 - student grade is distributed evenly
 - age correlates with grade, with some deviation
-- rank is composed of choices which are NOT uniformly distributed (certain offerings are naturally more popular than others)
+- rank is composed of choices which are **NOT** uniformly distributed (certain offerings are naturally more popular than others)
 - offering max capacities are slightly larger than the ratio of students to offerings
 - age or grade restrictions are rare
 
