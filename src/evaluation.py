@@ -21,7 +21,10 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 	choices = [0 for i in range(RANKSIZE + 1)]	# number of students receiving each choice
 	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades
 	gradeCounts = [0 for i in range(4)]	# total number of people in each grade
-	percentFirstPerGrade = []
+
+	# num students for each choice per grade
+	choicePerGrade = [[0 for c in range(RANKSIZE + 1)] for g in range(4)]
+	indexToString = {0 : "Freshmen", 1 : "Sophomores", 2 : "Juniors", 3 : "Seniors"}
 
 	for student in studentList:
 		
@@ -40,6 +43,9 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 		if index == 0:
 			grades[[9, 10, 11, 12].index(student.grade)] += 1
 
+		# increment num students in this grade for this choice
+		choicePerGrade[[9, 10, 11, 12].index(student.grade)][index] += 1
+
 	# Format results and print to console:
 	print "\n-------------------------------------------------------------------"
 	print "\nEVALUATION OF MATCHING BETWEEN " + str(len(studentList)) + " STUDENTS AND " + str(len(offeringList)) + " OFFERINGS:\n"
@@ -54,16 +60,13 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 			percentage = float(choices[i]) / len(studentList) * 100.0
 			print "Choice " + str(i + 1) + ":\t{:.3f}%".format(percentage)
 
-	print "\nPercentage first choice per grade"
-	for i in range(len(grades)):
-		percentage = float(grades[i]) / gradeCounts[i] * 100.0
-		percentFirstPerGrade.append(percentage)
-		print "Grade " + str(i + 9) + ":\t{:.3f}%".format(percentage)
-
 	print "\nPercentage full for each offering:"
 	total = 0 # sum of all capacity percentages
 	minPercent = None
 	maxPercent = None
+
+	minNumStudents = None
+	maxNumStudents = None
 
 	subscribed = []
 
@@ -76,12 +79,28 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 		total += percentage
 		if minPercent == None or percentage < minPercent:
 			minPercent = percentage
+			minNumStudents = offering.curSubscribed
 		if maxPercent == None or percentage > maxPercent:
 			maxPercent = percentage
+			maxNumStudents = offering.curSubscribed
 
 	print "\nAverage Percent Full: {:.3f}%".format(total / len(offeringList))
-	print "Min Percent Full: {:.3f}%".format(minPercent)
-	print "Max Percent Full: {:.3f}%".format(maxPercent)
+	print "Min Percent Full: {:.3f}% with {} students".format(minPercent, minNumStudents)
+	print "Max Percent Full: {:.3f}% with {} students".format(maxPercent, maxNumStudents)
+
+	print "\nGrade-wise stats: "
+	for g in range(len(choicePerGrade)):
+		choices = choicePerGrade[g]
+		gradeString = indexToString[g]
+		stuInThisGrade = gradeCounts[g]
+
+		print "\n" + gradeString + ": "
+		for c in range(len(choices)):
+			percentage = float(choices[c]) / stuInThisGrade * 100.0
+			if c == len(choices) - 1:
+				print "Arbitrary: \t{:.3f}%".format(percentage)
+			else:
+				print "Choice " + str(c + 1) + ": \t{:.3f}%".format(percentage)
 
 	print "\n-------------------------------------------------------------------"
 
@@ -97,15 +116,6 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 		plt.title('Students per choice')
 		plt.show()
 
-		grd = [i + 9 for i in range(4)]
-		plt.bar(grd, percentFirstPerGrade, align='center', alpha=0.5)
-		plt.xticks(np.arange(9, 13))
-		plt.ylim((0, 100))
-		plt.xlabel('Grade')
-		plt.ylabel('Percentage First Choice')
-		plt.title('Percentage of students per grade with first choice')
-		plt.show()
-
 		off = [i + 1 for i in range(len(offeringList))]
 		plt.bar(off, subscribed, align='center', alpha=0.5)
 		plt.xticks(np.arange(1, len(offeringList) + 1))
@@ -113,3 +123,14 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 		plt.ylabel('Students')
 		plt.title('Student Distribution')
 		plt.show()
+
+
+def getPercentFirstChoice(students):
+
+	numFirst = 0
+
+	for stu in students:
+		if stu.curOfferingID in stu.rank and stu.rank.index(stu.curOfferingID) == 0:
+			numFirst += 1
+
+	return float(numFirst) / len(students) * 100.0

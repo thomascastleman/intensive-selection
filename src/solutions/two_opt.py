@@ -4,14 +4,15 @@ from random import randint, uniform
 from ..util import *	# access to cost functions / legality checking
 
 # void, updates properties of Student obj 
-def two_opt(studentList, offeringList, idToOfferings):
+def two_opt(studentList, offeringList, idToOfferings, logging):
 
 	# calculate age priorities before two-opt
 	initAllAgeP(studentList)
 	currentCost = getSoftCostOfAllPairs(studentList, idToOfferings)	# calculate soft cost of all pairs
 	addAllGhostStudents(studentList, offeringList)	# now add ghosts (since they have no cost)
 
-	print "Initial Net Cost: {:.3f}".format(currentCost)
+	if logging: print "Initial Net Cost: {:.3f}".format(currentCost)
+
 	initCost = currentCost
 
 	temp = 100.0	# temperature for simulated annealing
@@ -19,7 +20,8 @@ def two_opt(studentList, offeringList, idToOfferings):
 	iteration = 0	# iteration counter
 	swaps = 0
 
-	while temp > 0.0001:
+
+	while temp > 0.00001:
 
 		# print "Iteration ", iteration, " temp=", temp, " cost=", currentCost
 
@@ -57,9 +59,10 @@ def two_opt(studentList, offeringList, idToOfferings):
 
 		iteration += 1
 
-	print "Finished after %d iterations and %d swaps" % (iteration - 1, swaps)
-	print "Net Cost of Final Matching: {:.3f}".format(currentCost)
-	print "Net Cost Decrease: {:.3f}".format(initCost - currentCost)
+	if logging:
+		print "Finished after %d iterations and %d swaps" % (iteration - 1, swaps)
+		print "Net Cost of Final Matching: {:.3f}".format(currentCost)
+		print "Net Cost Decrease: {:.3f}".format(initCost - currentCost)
 
 # get two random indices in a matching
 def getRandomIndices(numStudents):
