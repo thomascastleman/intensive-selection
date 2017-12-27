@@ -90,14 +90,14 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 
 	print "\nGrade-wise stats: "
 	for g in range(len(choicePerGrade)):
-		choices = choicePerGrade[g]
+		ch = choicePerGrade[g]
 		gradeString = indexToString[g]
 		stuInThisGrade = gradeCounts[g]
 
 		print "\n" + gradeString + ": "
-		for c in range(len(choices)):
-			percentage = float(choices[c]) / stuInThisGrade * 100.0
-			if c == len(choices) - 1:
+		for c in range(len(ch)):
+			percentage = float(ch[c]) / stuInThisGrade * 100.0
+			if c == len(ch) - 1:
 				print "Arbitrary: \t{:.3f}%".format(percentage)
 			else:
 				print "Choice " + str(c + 1) + ": \t{:.3f}%".format(percentage)

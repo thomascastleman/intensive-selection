@@ -29,9 +29,7 @@ def main():
 
 	# evaluate final solution
 	print "\nRunning Evaluation..."
-	ev.evaluate(students, offerings, idToStudents, idToOfferings, False)
-
-
+	ev.evaluate(students, offerings, idToStudents, idToOfferings, True)
 
 # run a full 2-opt solution on a set of student and offering objects
 def runTwoOpt(students, offerings, idToStudents, idToOfferings, logging, threshold):
@@ -39,14 +37,22 @@ def runTwoOpt(students, offerings, idToStudents, idToOfferings, logging, thresho
 	import solutions.initialCSP as csp
 	import solutions.two_opt as tpt
 	import evaluation as ev
+	import numpy as np
 
 	print "\nMinimum Acceptable Percentage First Choice: {:.2f}%".format(threshold)
 
 	while True:
 
 		# build solution
-		if logging: print "Building initial randomized matching... ",
+		if logging:
+			print "\n_________________________________________________________\n"
+			print "Building initial randomized matching... ",
 		start = time.time()
+
+		# randomize order of students and offerings before each solution attempt
+		np.random.shuffle(students)
+		np.random.shuffle(offerings)
+
 		csp.backTrackingSolution(0, students, offerings)
 		if logging: print "Complete in {:.3f} seconds".format(time.time() - start)
 		# csp.buildAcceptableSolution(students, offerings, idToStudents, idToOfferings)
@@ -63,7 +69,8 @@ def runTwoOpt(students, offerings, idToStudents, idToOfferings, logging, thresho
 
 		# evalulate and run again if necessary
 		percent = ev.getPercentFirstChoice(students)
-		print "Solution found with " + str(percent) + "%"
+		print "Solution found with " + str(percent) + "%, ",
+		print " threshold NOT met" if percent < threshold else " threshold MET"
 
 		if percent >= threshold:
 			break
