@@ -25,7 +25,7 @@ def main():
 	students, offerings, idToStudents, idToOfferings = td.generateTestData(400, 20)
 
 	# use 2-opt technique
-	students = runTwoOpt(students, offerings, idToStudents, idToOfferings, False, percentThreshold)
+	students = runTwoOpt(students, offerings, idToStudents, idToOfferings, True, percentThreshold)
 
 	# evaluate final solution
 	print "\nRunning Evaluation..."

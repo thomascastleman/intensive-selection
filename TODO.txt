@@ -3,6 +3,4 @@ Tasks to do:
 
 - implement Hosp / Res solution from Glasgow paper
 
-- README
-
 - think about uniform distribution
