@@ -3,7 +3,7 @@
 
 Created by Thomas Castleman and Johnny Lindbergh
 
-## PROBLEM DEFINITION
+## Problem Definition
 
 This algorithm is designed to match students to their preferred intensive, a variant of the <a href="https://en.wikipedia.org/wiki/Stable_marriage_problem" target="_blank">*stable matching problem*</a>. This specific instance is also quite similar to the *Hospitals and Residents Problem*, in which residents must be matched to medical institutions based on both their preferences and those of the institutions themselves.
 
@@ -30,7 +30,7 @@ The soft constraints, which are used afterwards to refine the solution, involve 
 
 Each of these factors may be weighted and scaled to meet the needs of the user, depending on what they consider to bear the greatest importance. 
 
-## ALGORITHM SUMMARY
+## Algorithm Summary
 
 The solution uses a combination of a <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking technique</a> and the <a href="https://en.wikipedia.org/wiki/2-opt" target="_blank">2-opt local search algorithm</a> for optimization.
 
@@ -38,7 +38,7 @@ Backtracking is used to solve the initial constraint satisfaction problem of cre
 
 2-opt is then used to refine this solution and optimize it based on a cost function, which factors in not only the student's rating of the paired intensive but also their grade and age. The weight (aka influence) of each of these factors is tunable through the adjustment of a set of coefficients, which determine how each value contributes to the overall cost of a pairing. 
 
-## RESULTS
+## Results
 
 <p align="center">
 <img src="http://tcastleman.com/imgs/choice_results.png">
@@ -46,7 +46,7 @@ Backtracking is used to solve the initial constraint satisfaction problem of cre
 
 Thus far, matchings with **upwards of 70% of students with their first choice** are feasible, and constructed within seconds. Sample results from a 400 student, 20 offering matching are displayed above.
 
-## EVALUATION
+## Evaluation
 
 To determine the success of the algorithm, a method to evaluate the effectiveness of a solution was created. Once a matching has been found, this function gathers statistics about the solution such as:
 
@@ -65,7 +65,7 @@ In addition, grade-level stats can also be logged. The sample results below demo
 <img src="http://tcastleman.com/imgs/gradewise.png">
 </p>
 
-## TEST DATA
+## Test Data
 
 In order to test the algorithm and debug, it was necessary to quickly generate reasonable test data, given quantities of students and offerings. To accomplish this, data was produced where:
 
@@ -75,7 +75,7 @@ In order to test the algorithm and debug, it was necessary to quickly generate r
 - offering max capacities are slightly larger than the ratio of students to offerings
 - age or grade restrictions are rare
 
-## USAGE
+## Usage
 
 To run, use the command
 ```
