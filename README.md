@@ -41,7 +41,7 @@ Backtracking is used to solve the initial constraint satisfaction problem of cre
 ## Results
 
 <p align="center">
-<img src="http://tcastleman.com/imgs/choice_results.png">
+<img src="http://castleman.space/imgs/choice_results.png">
 </p>
 
 Thus far, matchings with **upwards of 70% of students with their first choice** are feasible, and constructed within seconds. Sample results from a 400 student, 20 offering matching are displayed above.
@@ -57,12 +57,12 @@ To determine the success of the algorithm, a method to evaluate the effectivenes
 and logs them to the console. There is also an option for these stats to be plotted for a nice visual representation. 
 
 <p align="center">
-<img src="http://tcastleman.com/imgs/eval.png">
+<img src="http://castleman.space/imgs/eval.png">
 </p>
 
 In addition, grade-level stats can also be logged. The sample results below demonstrate the effects of raising the grade priority coefficient, as the higher grades are weighted towards better choices.
 <p align="center">
-<img src="http://tcastleman.com/imgs/gradewise.png">
+<img src="http://castleman.space/imgs/gradewise.png">
 </p>
 
 ## Test Data
