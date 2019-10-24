@@ -13,10 +13,15 @@ Give stats like:
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 from main import RANKSIZE
+from datetime import datetime
+
+EVAL_FILE_OUT = os.getcwd() + "/evaluation/eval.txt"
 
 def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
+	# open evaluation file for writing output logs
+	f = open(EVAL_FILE_OUT, "w+")
 
 	choices = [0 for i in range(RANKSIZE + 1)]	# number of students receiving each choice
 	grades = [0 for i in range(4)]	# number of students receiving first choice in each of the four grades
@@ -46,21 +51,27 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 		# increment num students in this grade for this choice
 		choicePerGrade[[9, 10, 11, 12].index(student.grade)][index] += 1
 
-	# Format results and print to console:
-	print "\n-------------------------------------------------------------------"
-	print "\nEVALUATION OF MATCHING BETWEEN " + str(len(studentList)) + " STUDENTS AND " + str(len(offeringList)) + " OFFERINGS:\n"
 
 
-	print "Percentage of each choice out of all students"
+	# mark time eval report was generated
+	timestamp = datetime.now().strftime("%m/%d/%Y %H:%M:%S") # mm/dd/YY H:M:S
+	log(f, "Generated on " + timestamp + "\n")
+
+	# start logging eval
+	log(f, "__________________________________________________________________")
+	log(f, "\nEVALUATION OF MATCHING BETWEEN " + str(len(studentList)) + " STUDENTS AND " + str(len(offeringList)) + " OFFERINGS:\n")
+
+
+	log(f, "Percentage of each choice out of all students")
 	for i in range(len(choices)):
 		if i == len(choices) - 1:
 			percentage = float(choices[i]) / len(studentList) * 100.0
-			print "Arbitrary:\t{:.3f}%".format(percentage)
+			log(f, "Arbitrary:\t{:.3f}%".format(percentage))
 		else:
 			percentage = float(choices[i]) / len(studentList) * 100.0
-			print "Choice " + str(i + 1) + ":\t{:.3f}%".format(percentage)
+			log(f, "Choice " + str(i + 1) + ":\t{:.3f}%".format(percentage))
 
-	print "\nPercentage full for each offering:"
+	log(f, "\nPercentage full for each offering:")
 	total = 0 # sum of all capacity percentages
 	minPercent = None
 	maxPercent = None
@@ -70,11 +81,11 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 
 	subscribed = []
 
-	print "ID\tPercent of capacity filled"
+	log(f, "ID\tPercent of capacity filled")
 	for offering in offeringList:
 		subscribed.append(offering.curSubscribed)
 		percentage = float(offering.curSubscribed) / offering.maxCapacity * 100.0
-		print str(offering.id) + ": \t{:.3f}%".format(percentage)
+		log(f, str(offering.id) + ": \t{:.3f}% \t({} students)".format(percentage, offering.curSubscribed))
 
 		total += percentage
 		if minPercent == None or percentage < minPercent:
@@ -84,25 +95,28 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 			maxPercent = percentage
 			maxNumStudents = offering.curSubscribed
 
-	print "\nAverage Percent Full: {:.3f}%".format(total / len(offeringList))
-	print "Min Percent Full: {:.3f}% with {} students".format(minPercent, minNumStudents)
-	print "Max Percent Full: {:.3f}% with {} students".format(maxPercent, maxNumStudents)
+	log(f, "\nAverage Percent Full: {:.3f}%".format(total / len(offeringList)))
+	log(f, "Min Percent Full: {:.3f}% with {} students".format(minPercent, minNumStudents))
+	log(f, "Max Percent Full: {:.3f}% with {} students".format(maxPercent, maxNumStudents))
 
-	print "\nGrade-wise stats: "
+	log(f, "\nGrade-wise stats: ")
 	for g in range(len(choicePerGrade)):
 		ch = choicePerGrade[g]
 		gradeString = indexToString[g]
 		stuInThisGrade = gradeCounts[g]
 
-		print "\n" + gradeString + ": "
+		log(f, "\n" + gradeString + ": ")
 		for c in range(len(ch)):
 			percentage = float(ch[c]) / stuInThisGrade * 100.0
 			if c == len(ch) - 1:
-				print "Arbitrary: \t{:.3f}%".format(percentage)
+				log(f, "Arbitrary: \t{:.3f}%".format(percentage))
 			else:
-				print "Choice " + str(c + 1) + ": \t{:.3f}%".format(percentage)
+				log(f, "Choice " + str(c + 1) + ": \t{:.3f}%".format(percentage))
 
-	print "\n-------------------------------------------------------------------"
+	log(f, "\n__________________________________________________________________")
+
+	# close evaluation output file
+	f.close()
 
 	# PLOTS:
 
@@ -134,3 +148,9 @@ def getPercentFirstChoice(students):
 			numFirst += 1
 
 	return float(numFirst) / len(students) * 100.0
+
+
+# both print text to console and write it to the given file
+def log(f, content):
+	print content
+	f.write(content + "\n")

@@ -20,7 +20,6 @@ def two_opt(studentList, offeringList, idToOfferings, logging):
 	iteration = 0	# iteration counter
 	swaps = 0
 
-
 	while temp > 0.00001:
 
 		# print "Iteration ", iteration, " temp=", temp, " cost=", currentCost

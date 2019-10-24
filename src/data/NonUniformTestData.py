@@ -30,8 +30,8 @@ def generateTestData(numStudents, numOfferings):
 	from .. import main
 	RANKSIZE = main.RANKSIZE
 
-	# # for visualization:
-	# totals = [0 for i in range(numOfferings)]
+	# for visualization:
+	totals = [0 for i in range(numOfferings)]
 
 	allGrades = [9, 10, 11, 12]		# grade levels
 	normalAges = [15, 16, 17, 18]	# normal age for each grade level
@@ -55,9 +55,9 @@ def generateTestData(numStudents, numOfferings):
 		rank = (np.random.choice(numOfferings, RANKSIZE, replace=False, p=popularities)).tolist()
 
 
-		# # visualization:
-		# for r in rank:
-		# 	totals[r] += 1
+		# visualization:
+		for r in rank:
+			totals[r] += 1
 
 		s = Student(stuID, age, grade, rank)	# construct student
 		idToStudents[stuID] = s					# add to global ID hashmap
@@ -68,7 +68,9 @@ def generateTestData(numStudents, numOfferings):
 		maxCap = int(numStudents / numOfferings * 1.25)
 		totalCapacity += maxCap
 		minGrade, minAge = 9, 0		# init at defaults
-		if uniform(0, 1) < 0.15:
+
+		# 35% chance of EITHER an age or grade restriction (exclusive)
+		if uniform(0, 1) < 0.35:
 			# apply grade restriction
 			if uniform(0, 1) < 0.5:
 				# 11th grade likely to be min grade
@@ -83,16 +85,16 @@ def generateTestData(numStudents, numOfferings):
 		offerings.append(off)								# add to offerings array
 
 
-	# y_pos = np.arange(numOfferings)
+	y_pos = np.arange(numOfferings)
 	 
-	# plt.bar(y_pos, totals, align='center', alpha=0.5)
-	# plt.xticks(y_pos, y_pos)
-	# plt.ylabel('Frequency')
-	# plt.xlabel('Intensive Choice')
+	plt.bar(y_pos, totals, align='center', alpha=0.5)
+	plt.xticks(y_pos, y_pos)
+	plt.ylabel('Frequency')
+	plt.xlabel('Intensive Choice')
 
-	# plt.title('Choice Frequency')
+	plt.title('Choice Frequency')
 	 
-	# plt.show()
+	plt.show()
 
 	if totalCapacity < len(students):
 		offerings[0].maxCapacity += len(students) - totalCapacity
