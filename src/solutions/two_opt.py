@@ -89,7 +89,7 @@ def addAllGhostStudents(students, offerings):
 	for offering in offerings:
 		while offering.curSubscribed < offering.maxCapacity:
 			# create new ghost under this offering
-			ghost = Student(None, None, None, None, True)
+			ghost = Student(None, None, None, None, None, None, True)
 			ghost.curOfferingID = offering.id
 			# add to student list
 			students.append(ghost)

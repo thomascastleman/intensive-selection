@@ -20,9 +20,13 @@ def main():
 
 	import data.NonUniformTestData as td
 	import evaluation as ev
+	import dataio as io
 
 	# construct all objects, and hashmaps
 	students, offerings, idToStudents, idToOfferings = td.generateTestData(400, 20)
+
+	# UNCOMMENT THE BELOW LINE TO RUN MATCHING ON ACTUAL DATA (and comment out the above expression that uses the test data)
+	# students, offerings, idToStudents, idToOfferings = io.constructObjects()
 
 	# use 2-opt technique
 	students = runTwoOpt(students, offerings, idToStudents, idToOfferings, True, percentThreshold)
@@ -30,6 +34,9 @@ def main():
 	# evaluate final solution
 	print "\nRunning Evaluation..."
 	ev.evaluate(students, offerings, idToStudents, idToOfferings, True)
+
+	# write the result of the matching to human-readable CSV
+	io.writeMatchingToFile()
 
 # run a full 2-opt solution on a set of student and offering objects
 def runTwoOpt(students, offerings, idToStudents, idToOfferings, logging, threshold):

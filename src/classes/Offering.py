@@ -4,9 +4,10 @@ import Queue as q
 
 class Offering:
 
-	def __init__(self, _id, _maxCapacity, _minGrade=9, _minAge=0):
+	def __init__(self, _id, _name, _maxCapacity, _minGrade=9, _minAge=0):
 		# general use properties:
 		self.id = _id
+		self.name = _name
 		self.maxCapacity = _maxCapacity
 		self.minGrade = _minGrade
 		self.minAge = _minAge
@@ -19,6 +20,7 @@ class Offering:
 	# FOR DEBUG
 	def log(self):
 		print "\nOffering ID: ", self.id
+		print "Name: ", self.name
 		print "Max Cap: ", self.maxCapacity
 		print "Min Grade: ", self.minGrade
 		print "Min Age: ", self.minAge

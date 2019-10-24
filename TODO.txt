@@ -1,6 +1,0 @@
-
-Tasks to do:
-
-- implement Hosp / Res solution from Glasgow paper
-
-- think about uniform distribution
