@@ -10,6 +10,13 @@ MATCHING_OUTPUT_FILE = os.getcwd() + "/output/matching.csv"
 def constructObjects():
   pass
 
+# given a list of objects with IDs, construct a mapping from IDs to objects
+def mapIDtoObject(lst):
+  hashmap = {}
+  for obj in lst:
+    hashmap[obj.id] = obj
+  return hashmap
+
 # Serializes a matching into human-readable CSV form
 def writeMatchingToFile(students, offerings, idToStudents, idToOfferings):
   for stu in students:

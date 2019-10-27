@@ -59,7 +59,7 @@ def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 
   # start logging eval
   log(f, "__________________________________________________________________")
-  log(f, "\nEVALUATION OF MATCHING BETWEEN " + str(len(studentList)) + " STUDENTS AND " + str(len(offeringList)) + " OFFERINGS:\n")
+  log(f, "\Evaluation of matching between " + str(len(studentList)) + " students and " + str(len(offeringList)) + " intensives:\n")
 
 
   log(f, "Percentage of each choice out of all students")
