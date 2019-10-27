@@ -59,7 +59,7 @@ def generateTestData(numStudents, numOfferings):
 		for r in rank:
 			totals[r] += 1
 
-		s = Student(stuID, None, None, age, grade, rank)	# construct student
+		s = Student(stuID, "N/A email", "N/A name", age, grade, rank)	# construct student
 		idToStudents[stuID] = s					# add to global ID hashmap
 		students.append(s)						# add to students array
 
@@ -80,7 +80,7 @@ def generateTestData(numStudents, numOfferings):
 				# higher ages more likely to be min age, if any restrictions imposed
 				minAge = np.random.choice(normalAges, 1, p=[0.0625, 0.1875, 0.25, 0.5])[0]
 
-		off = Offering(offID, None, maxCap, minGrade, minAge)		# construct offering
+		off = Offering(offID, "N/A name", maxCap, minGrade, minAge)		# construct offering
 		idToOfferings[offID] = off							# add to global ID hashmap
 		offerings.append(off)								# add to offerings array
 

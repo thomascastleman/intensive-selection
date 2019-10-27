@@ -17,6 +17,9 @@ class Offering:
 		self.capacityCost = 0	# hard cost when oversubscribed (# of students over capacity)
 		self.pq = q.PriorityQueue()	# ID's of currently subscribed students, ordered by static cost
 
+		# post-matching property for holding subscribed student data when writing matching
+		self.subscribedStudents = []
+
 	# FOR DEBUG
 	def log(self):
 		print "\nOffering ID: ", self.id

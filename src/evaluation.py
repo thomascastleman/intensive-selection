@@ -17,7 +17,7 @@ import os
 from main import RANKSIZE
 from datetime import datetime
 
-EVAL_FILE_OUT = os.getcwd() + "/evaluation/eval.txt"
+EVAL_FILE_OUT = os.getcwd() + "/output/eval.txt"
 
 def evaluate(studentList, offeringList, idToStudents, idToOfferings, showPlots):
 	# open evaluation file for writing output logs

@@ -1,0 +1,76 @@
+Generated on 10/26/2019 22:32:36
+
+__________________________________________________________________
+
+EVALUATION OF MATCHING BETWEEN 400 STUDENTS AND 20 OFFERINGS:
+
+Percentage of each choice out of all students
+Choice 1:	66.250%
+Choice 2:	23.750%
+Choice 3:	5.500%
+Choice 4:	3.000%
+Choice 5:	0.500%
+Arbitrary:	1.000%
+
+Percentage full for each offering:
+ID	Percent of capacity filled
+3: 	40.000% 	(10 students)
+4: 	100.000% 	(25 students)
+6: 	12.000% 	(3 students)
+19: 	44.000% 	(11 students)
+5: 	96.000% 	(24 students)
+10: 	56.000% 	(14 students)
+17: 	100.000% 	(25 students)
+2: 	100.000% 	(25 students)
+9: 	100.000% 	(25 students)
+7: 	96.000% 	(24 students)
+16: 	100.000% 	(25 students)
+8: 	100.000% 	(25 students)
+11: 	100.000% 	(25 students)
+0: 	100.000% 	(25 students)
+12: 	100.000% 	(25 students)
+13: 	100.000% 	(25 students)
+15: 	12.000% 	(3 students)
+1: 	100.000% 	(25 students)
+18: 	88.000% 	(22 students)
+14: 	56.000% 	(14 students)
+
+Average Percent Full: 80.000%
+Min Percent Full: 12.000% with 3 students
+Max Percent Full: 100.000% with 25 students
+
+Grade-wise stats: 
+
+Freshmen: 
+Choice 1: 	59.770%
+Choice 2: 	29.885%
+Choice 3: 	6.897%
+Choice 4: 	2.299%
+Choice 5: 	0.000%
+Arbitrary: 	1.149%
+
+Sophomores: 
+Choice 1: 	63.636%
+Choice 2: 	24.545%
+Choice 3: 	5.455%
+Choice 4: 	5.455%
+Choice 5: 	0.000%
+Arbitrary: 	0.909%
+
+Juniors: 
+Choice 1: 	64.078%
+Choice 2: 	21.359%
+Choice 3: 	6.796%
+Choice 4: 	3.883%
+Choice 5: 	1.942%
+Arbitrary: 	1.942%
+
+Seniors: 
+Choice 1: 	77.000%
+Choice 2: 	20.000%
+Choice 3: 	3.000%
+Choice 4: 	0.000%
+Choice 5: 	0.000%
+Arbitrary: 	0.000%
+
+__________________________________________________________________

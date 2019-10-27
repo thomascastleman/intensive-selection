@@ -36,7 +36,7 @@ def main():
 	ev.evaluate(students, offerings, idToStudents, idToOfferings, True)
 
 	# write the result of the matching to human-readable CSV
-	io.writeMatchingToFile()
+	io.writeMatchingToFile(students, offerings, idToStudents, idToOfferings)
 
 # run a full 2-opt solution on a set of student and offering objects
 def runTwoOpt(students, offerings, idToStudents, idToOfferings, logging, threshold):
